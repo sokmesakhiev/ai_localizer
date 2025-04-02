@@ -1,0 +1,16 @@
+es:
+  title:
+    welcome: Hola %{name}
+    header: Traductor de IA
+  # Body content
+  body:
+    description: <p>Traductor de IA</p>. Por favor, lea la página "acerca de" para obtener más información sobre este proyecto.
+    # Author name
+    author: Sokmesakhiev
+    options:
+      0: Opción 1
+      1: Opción 2
+    choices: ['Hola', 'Mundo']
+  # Footer content
+  footer:
+    copyright: Todos los derechos reservados. Copyright (c) %{year}.

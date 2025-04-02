@@ -1,0 +1,57 @@
+# frozen_string_literal: true
+
+module AiLocalizer
+  module Api
+    class Translator
+      CHUNK_SIZE = 100
+
+      attr_reader :texts, :from_lang, :to_lang, :engine
+
+      def initialize(texts:, from_lang:, to_lang:, engine: nil)
+        @texts = texts
+        @from_lang = from_lang
+        @to_lang = to_lang
+        @engine = engine || AiLocalizer::Utils::EngineSelector.new(from_lang:, to_lang:).call
+      end
+
+      def call
+        source_blocks = build_block(texts:)
+        source_blocks.each_slice(CHUNK_SIZE) do |blocks|
+          result = AiLocalizer::Services::TranslateChunkService.new(blocks:, from_lang:, to_lang:, engine:).call
+
+          blocks.each do |block|
+            signature = block[:signature]
+            block[:translation] = result[:translations][signature]
+          end
+        end
+
+        source_blocks.pluck(:translation)
+      end
+
+      private
+
+      def build_block(texts:)
+        blocks = []
+
+        texts.each_with_index do |text, index|
+          blocks.push(
+            {
+              original: text,
+              context: nil,
+              entry: nil,
+              existing_translation: nil,
+              index: ["en", index.to_s],
+              parent_index: nil,
+              path: "",
+              plural: nil,
+              plural_count: nil,
+              signature: Digest::MD5.hexdigest("#{index}#{text}")
+            }
+          )
+        end
+
+        blocks
+      end
+    end
+  end
+end
