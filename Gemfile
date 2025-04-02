@@ -3,7 +3,7 @@ source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'anthropic'
-gem 'aws-sdk-bedrockruntime', '~> 1.29.0'
+gem 'aws-sdk-bedrockruntime', '~> 1.42.0'
 gem "rspec-core"
 gem "rspec-expectations"
 gem "rspec-mocks"
