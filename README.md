@@ -1,4 +1,8 @@
-# AiLocalizer
+# AI Localizer
+[![Gem Version](https://badge.fury.io/rb/ai_localizer.svg)](https://rubygems.org/gems/ai_localizer)
+[![Build Status](https://github.com/sokmesakhiev/ai_localizer/workflows/Build%20Gem/badge.svg)](https://github.com/sokmesakhiev/ai_localizer/actions?query=workflow%3A%22Build+Gem%22)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-success.svg)](https://dependabot.com)
+
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ai_localizer`. To experiment with that code, run `bin/console` for an interactive prompt.
 
