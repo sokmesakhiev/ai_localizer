@@ -92,7 +92,9 @@ GEM
       uri
     nokogiri (1.18.4-arm64-darwin)
       racc (~> 1.4)
-    oj (3.16.9)
+    nokogiri (1.18.4-x86_64-linux-gnu)
+      racc (~> 1.4)
+    oj (3.16.10)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     ostruct (0.6.1)
@@ -176,6 +178,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x86_64-linux
 
 DEPENDENCIES
   activesupport
