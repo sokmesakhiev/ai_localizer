@@ -1,0 +1,16 @@
+en:
+  title:
+    welcome: "Hello %{name}"
+    header: "AI translator"
+  # Body content
+  body:
+    description: "<p>AI translator</p>. Please read \"about\" page to learn more about this project."
+    # Author name
+    author: "Sokmesakhiev"
+    options:
+      - "Option 1"
+      - "Option 2"
+    choices: ["Hello", "World"]
+  # Footer content
+  footer:
+    copyright: "All rights reserved. Copyright (c) %{year}." #Copyright
