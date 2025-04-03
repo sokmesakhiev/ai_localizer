@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
 RSpec.describe AiLocalizer::Utils::PlaceholderProcessor do
   describe '#replace_placeholders_with_original' do
     it 'replaces placeholders with their original values' do

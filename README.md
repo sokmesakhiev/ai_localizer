@@ -3,10 +3,20 @@
 [![Build Status](https://github.com/sokmesakhiev/ai_localizer/workflows/Build%20Gem/badge.svg)](https://github.com/sokmesakhiev/ai_localizer/actions?query=workflow%3A%22Build+Gem%22)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-success.svg)](https://dependabot.com)
 
+### AI Localizer – Effortless i18n Translation with LLMs  
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ai_localizer`. To experiment with that code, run `bin/console` for an interactive prompt.
+**AI Localizer** is a powerful Ruby gem designed to streamline internationalization (i18n) by leveraging Large Language Models (LLMs) to automatically translate localization files into multiple target languages. It simplifies the translation workflow for Rails applications and other projects using structured i18n files (such as YAML and JSON).  
 
-TODO: Delete this and the text above, and describe your gem
+#### 🔹 **Key Features**  
+- **Automated Translations**: Uses AI to generate high-quality translations for i18n files.  
+- **Multiple Target Languages**: Easily translate your app’s content into various languages in a single command.  
+- **Seamless Integration**: Works with standard i18n formats (YAML) for easy adoption in Rails and other frameworks.  
+- **Customizable & Extensible**: Supports fine-tuning translation models and integrating with different AI providers.  
+- **CI/CD Ready**: Can be integrated into GitHub Actions or other CI pipelines for continuous localization updates.  
+
+With `ai_localizer`, you can eliminate manual translation efforts, reduce errors, and keep your application multilingual with minimal hassle.  
+
+🚀 **Start localizing smarter today!**  
 
 ## Installation
 
