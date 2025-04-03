@@ -2,9 +2,9 @@ name: Ruby Gem
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -23,6 +23,20 @@ jobs:
       uses: ruby/setup-ruby@086ffb1a2090c870a3f881cc91ea83aa4243d408
       with:
         ruby-version: 3.1.2
+
+    - name: Bundle Install
+      run: |
+        bundle install
+
+    - name: Run Specs
+      run: |
+        bundle exec rspec spec
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        BEDROCK_AWS_ACCESS_KEY_ID: ${{ secrets.BEDROCK_AWS_ACCESS_KEY_ID }}
+        BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
+        DEEPSEEK_ACCESS_TOKEN: ${{ secrets.DEEPSEEK_ACCESS_TOKEN }}
+        OPEN_AI_ACCESS_TOKEN: ${{ secrets.OPEN_AI_ACCESS_TOKEN }}
 
     - name: Publish to GPR
       run: |
