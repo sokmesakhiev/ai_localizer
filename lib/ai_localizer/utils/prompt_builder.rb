@@ -68,7 +68,8 @@ module AiLocalizer
       end
 
       def load_prompts
-        file_path = ('./config/prompt.yml')
+        gem_root = Gem.loaded_specs['ai_localizer'].full_gem_path
+        file_path = File.join(gem_root, 'config', 'prompt.yml')
         prompts_data = YAML.load_file(file_path)
 
         prompts_data.transform_keys(&:to_sym) || {}

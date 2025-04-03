@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
-require 'dotenv/load'
 
 module AiLocalizer
   class Configuration
@@ -28,7 +27,7 @@ module AiLocalizer
 
       @anthropic_api_key = ENV['ANTHROPIC_API_KEY']
       @anthropic_api_version = '2023-06-01'
-      @anthropic_model = 'claude-3-5-sonnet-20240620'
+      @anthropic_model = 'claude-3-7-sonnet-20250219'
 
       @open_ai_access_token = ENV['OPEN_AI_ACCESS_TOKEN']
       @open_ai_model = 'gpt-4o'

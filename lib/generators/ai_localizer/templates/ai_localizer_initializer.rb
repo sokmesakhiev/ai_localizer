@@ -25,8 +25,7 @@ AiLocalizer.configure do |config|
   config.anthropic_model = Figaro.env.fetch("ANTHROPIC_MODEL", 'claude-3-5-sonnet-20240620')
 
   # Deepseek configuration
-  config.deepseek_api_key = Figaro.env.fetch("DEEPSEEK_API_KEY", nil)
-  config.deepseek_api_version =  Figaro.env.fetch("DEEPSEEK_API_VERSION", '2023-06-01')
+  config.deepseek_access_token = Figaro.env.fetch("DEEPSEEK_ACCESS_TOKEN",nil)
   config.deepseek_model = Figaro.env.fetch("DEEPSEEK_MODEL", 'claude-3-5-sonnet-20240620')
 
   # OpenAI configuration

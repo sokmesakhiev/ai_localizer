@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ai_localizer (0.1.0)
+    ai_localizer (0.1.1)
       anthropic
       aws-sdk-bedrockruntime
       deepseek-client
@@ -94,6 +94,8 @@ GEM
       uri
     nokogiri (1.18.4)
       mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.18.4-arm64-darwin)
       racc (~> 1.4)
     oj (3.16.10)
       bigdecimal (>= 3.0)
