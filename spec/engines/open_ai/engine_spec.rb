@@ -9,7 +9,7 @@ RSpec.describe AiLocalizer::Engines::OpenAi::Engine do
 
       translation = engine.process(text: ['Hello %p#12345678', 'How are you?'])
 
-      expect(translation).to eq(['Hola %p#12345678', '¿Cómo estás?'])
+      expect(translation).to eq(['Hola %p#12345678', '¿Cómo está?'])
       expect(engine.service_name).to eq('OpenAI')
     end
   end
