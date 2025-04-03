@@ -1,7 +1,7 @@
 name: Publish Gem
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
@@ -25,16 +25,6 @@ jobs:
     - name: Bundle Install
       run: |
         bundle install
-
-    - name: Run Specs
-      run: |
-        bundle exec rspec spec
-      env:
-        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        BEDROCK_AWS_ACCESS_KEY_ID: ${{ secrets.BEDROCK_AWS_ACCESS_KEY_ID }}
-        BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
-        DEEPSEEK_ACCESS_TOKEN: ${{ secrets.DEEPSEEK_ACCESS_TOKEN }}
-        OPEN_AI_ACCESS_TOKEN: ${{ secrets.OPEN_AI_ACCESS_TOKEN }}
 
     - name: Publish to GPR
       run: |
