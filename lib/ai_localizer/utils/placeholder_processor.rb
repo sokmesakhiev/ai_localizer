@@ -32,7 +32,7 @@ module AiLocalizer
         content
       end
 
-      def self.analyze_placeholder_discrepancies(source:, translation:, engine:, all_placeholder_formats:)
+      def self.analyze_placeholder_discrepancies(source:, translation:, all_placeholder_formats:)
         source_placeholders = extract_placeholders(source, all_placeholder_formats)
         translation_placeholders = extract_placeholders(translation, all_placeholder_formats)
 

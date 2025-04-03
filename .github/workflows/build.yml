@@ -1,0 +1,39 @@
+name: Ruby Gem
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby 3.3.3
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@086ffb1a2090c870a3f881cc91ea83aa4243d408
+      with:
+        ruby-version: 3.3.3
+
+    - name: Bundle Install
+      run: |
+        bundle install
+
+    - name: Run Specs
+      run: |
+        bundle exec rspec spec
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        BEDROCK_AWS_ACCESS_KEY_ID: ${{ secrets.BEDROCK_AWS_ACCESS_KEY_ID }}
+        BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
+        DEEPSEEK_ACCESS_TOKEN: ${{ secrets.DEEPSEEK_ACCESS_TOKEN }}
+        OPEN_AI_ACCESS_TOKEN: ${{ secrets.OPEN_AI_ACCESS_TOKEN }}
