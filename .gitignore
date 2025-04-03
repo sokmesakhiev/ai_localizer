@@ -10,6 +10,9 @@
 # rspec failure tracking
 .rspec_status
 
+# Env file
+.env
+
 # Mac
 .DS_Store
 

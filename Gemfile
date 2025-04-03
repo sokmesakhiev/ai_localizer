@@ -13,5 +13,7 @@ gem "figaro"
 gem 'ruby-openai'
 gem 'deepseek-client'
 gem 'oj'
+gem "dotenv", "~> 3.1"
+
 # Specify your gem's dependencies in ai_localizer.gemspec
 gemspec
