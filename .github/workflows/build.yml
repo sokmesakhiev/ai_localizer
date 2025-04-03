@@ -1,0 +1,33 @@
+name: Ruby Gem
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby 3.3.3
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@086ffb1a2090c870a3f881cc91ea83aa4243d408
+      with:
+        ruby-version: 3.3.3
+
+    - name: Bundle Install
+      run: |
+        bundle install
+
+    - name: Run Specs
+      run: |
+        bundle exec rspec spec
