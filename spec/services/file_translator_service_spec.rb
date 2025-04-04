@@ -16,7 +16,7 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
     header: Traductor de IA
   # Body content
   body:
-    description: <p>Traductor de IA</p>. Por favor, lea la página \"acerca de\" para obtener más información sobre este proyecto.
+    description: <p>Traductor de IA</p>.
     # Author name
     author: Sokmesakhiev
     options:
@@ -25,7 +25,7 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
     choices: ['Hola', 'Mundo']
   # Footer content
   footer:
-    copyright: Todos los derechos reservados. Copyright (c) %{year}."
+    copyright: Todos los \"derechos\" reservados. Copyright (c) %{year}."
 
       described_class.new(template_file_path:, from_lang: 'en', to_lang: 'es', engine:, use_existing_translations: false).call
 

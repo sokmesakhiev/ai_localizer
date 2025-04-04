@@ -4,7 +4,7 @@ es:
     header: Traductor de IA
   # Body content
   body:
-    description: <p>Traductor de IA</p>. Por favor, lea la página "acerca de" para obtener más información sobre este proyecto.
+    description: <p>Traductor de IA</p>.
     # Author name
     author: Sokmesakhiev
     options:
@@ -13,4 +13,4 @@ es:
     choices: ['Hola', 'Mundo']
   # Footer content
   footer:
-    copyright: Todos los derechos reservados. Copyright (c) %{year}.
+    copyright: Todos los "derechos" reservados. Copyright (c) %{year}.

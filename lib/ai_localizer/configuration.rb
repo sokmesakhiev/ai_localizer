@@ -23,7 +23,7 @@ module AiLocalizer
       @bedrock_aws_http_open_timeout = 60
       @bedrock_aws_http_read_timeout = 120
       @bedrock_aws_retry_limit = 10
-      @bedrock_aws_session_token = nil
+      @bedrock_aws_sesion_token = nil
 
       @anthropic_api_key = ENV['ANTHROPIC_API_KEY']
       @anthropic_api_version = '2023-06-01'
