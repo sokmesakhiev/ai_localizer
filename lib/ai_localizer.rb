@@ -59,7 +59,6 @@ require_relative './ai_localizer/engines/deepseek/request'
 require_relative './ai_localizer/engines/deepseek/response'
 
 module AiLocalizer
-  Dotenv.load
   configure {}
 
   def self.create_locales(template_file_path:, from_lang:, to_langs:, indicator: nil, use_existing_translations: true)

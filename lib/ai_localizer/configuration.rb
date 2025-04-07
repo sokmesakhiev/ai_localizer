@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
-require 'dotenv'
 
 module AiLocalizer
   class Configuration
