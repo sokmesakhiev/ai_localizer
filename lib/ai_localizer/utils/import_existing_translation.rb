@@ -14,7 +14,10 @@ module AiLocalizer
         source_blocks.each do |source_block|
           target_block = target_blocks.find { |target_block| target_block[:index][1..] == source_block[:index][1..] }
 
-          source_block[:translation] = target_block[:original] if target_block.present?
+          if target_block.present?
+            source_block[:translation] = target_block[:original]
+            source_block[:existing_translation] = true
+          end
         end
       end
     end

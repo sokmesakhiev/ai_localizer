@@ -4,10 +4,6 @@ module AiLocalizer
   module Engines
     module Bedrock
       class Engine < AiLocalizer::Engines::BaseEngine
-        def service_name
-          'AWSBedrock'
-        end
-
         private
 
         def client

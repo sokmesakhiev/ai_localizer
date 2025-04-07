@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ai_localizer (0.1.0)
+    ai_localizer (0.1.1)
       anthropic
       aws-sdk-bedrockruntime
       deepseek-client
@@ -188,7 +188,7 @@ DEPENDENCIES
   aws-sdk-bedrockruntime (~> 1.29.0)
   bundler (~> 2.3.17)
   deepseek-client
-  dotenv (~> 3.1)
+  dotenv
   faker
   fakeweb
   figaro

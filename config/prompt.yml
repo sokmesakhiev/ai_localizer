@@ -7,7 +7,7 @@ user_prompt: >
       - ${{formality_prompt}}
       - The texts are from the same page and can be used to identify context and improve the translations.
       - Produce a JSON-formatted response maintaining the same structure, where translations are associated with their original "id".
-      ${{translation_length_prompt}}
+      ${{restrict_translation_length_result_prompt}}
       Your response should strictly follow this format:
       {"123": "Aici este textul “1” ce va fi tradus", "456": "Aici este textul 2 ce va fi tradus"}
     - Do not include any additional text or comments outside this JSON structure.

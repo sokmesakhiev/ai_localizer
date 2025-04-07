@@ -4,10 +4,6 @@ module AiLocalizer
   module Engines
     module OpenAi
       class Engine < AiLocalizer::Engines::BaseEngine
-        def service_name
-          'OpenAI'
-        end
-
         private
 
         def client

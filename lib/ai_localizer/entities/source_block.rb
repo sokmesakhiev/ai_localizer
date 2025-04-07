@@ -7,19 +7,19 @@ module AiLocalizer
 
       def initialize(object, opts = {})
         @object = object
-        @opts = OpenStruct.new(**opts)
+        @opts = opts
       end
 
       def index
-        opts.index
+        opts[:index]
       end
 
       def original
-        opts.original
+        opts[:original]
       end
 
       def path
-        opts.path
+        opts[:path]
       end
 
       def signature

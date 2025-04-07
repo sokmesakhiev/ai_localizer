@@ -4,7 +4,7 @@ en:
     header: "AI translator"
   # Body content
   body:
-    description: "<p>AI translator</p>. Please read \"about\" page to learn more about this project."
+    description: "<p>AI translator</p>."
     # Author name
     author: "Sokmesakhiev"
     options:
@@ -13,4 +13,4 @@ en:
     choices: ["Hello", "World"]
   # Footer content
   footer:
-    copyright: "All rights reserved. Copyright (c) %{year}." #Copyright
+    copyright: "All \"rights\" reserved. Copyright (c) %{year}." #Copyright
