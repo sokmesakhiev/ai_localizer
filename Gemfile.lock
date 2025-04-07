@@ -58,6 +58,7 @@ GEM
       faraday (~> 2.0)
       faraday-retry (~> 2.0)
     diff-lcs (1.6.0)
+    dotenv (3.1.7)
     erubi (1.13.1)
     event_stream_parser (1.0.0)
     faker (3.5.1)
@@ -93,8 +94,6 @@ GEM
       uri
     nokogiri (1.18.4)
       mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.18.4-arm64-darwin)
       racc (~> 1.4)
     oj (3.16.10)
       bigdecimal (>= 3.0)
@@ -189,6 +188,7 @@ DEPENDENCIES
   aws-sdk-bedrockruntime (~> 1.29.0)
   bundler (~> 2.3.17)
   deepseek-client
+  dotenv
   faker
   fakeweb
   figaro

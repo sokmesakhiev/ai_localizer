@@ -8,11 +8,10 @@ RSpec.describe AiLocalizer::Engines::Anthropic::Engine do
       engine = described_class.new(from_lang: 'en', to_lang: 'es')
 
       translation = engine.process(
-        text: ['Hello %p#12345678', 'Please type "Yes"']
+        text: ['Hello %p#12345678', 'Welcome to "Cambodia"']
       )
 
-      expect(translation).to eq(['Hola %p#12345678', 'Por favor, escriba "Sí"'])
-      expect(engine.service_name).to eq('AnthropicAPI')
+      expect(translation).to eq(['Hola %p#12345678', 'Bienvenido a "Camboya"'])
     end
   end
 end

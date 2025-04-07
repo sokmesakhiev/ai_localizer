@@ -8,7 +8,7 @@ module AiLocalizer
       TRANSLATION_TO_SOURCE_LENGTH_RATIO = 1.5 # Estimated expansion factor for translation
       IDEAL_BATCH_SIZE = (MAX_OUTPUT_TOKENS / TRANSLATION_TO_SOURCE_LENGTH_RATIO).to_i # ideal size (in tokens) of one batch of original text in one request to the LLM
 
-      attr_reader :from_lang, :to_lang
+      attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio
 
       def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil)
         @from_lang = from_lang

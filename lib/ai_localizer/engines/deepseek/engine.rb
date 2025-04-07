@@ -4,10 +4,6 @@ module AiLocalizer
   module Engines
     module Deepseek
       class Engine < AiLocalizer::Engines::BaseEngine
-        def service_name
-          'Deepseek'
-        end
-
         private
 
         def client

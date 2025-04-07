@@ -5,7 +5,7 @@ module AiLocalizer
     class PromptBuilder
       ALLOWED_LENGTH_CONSTRAIN_INTENSITY = %w[hard].freeze
 
-      attr_reader :from_lang, :to_lang, :formality
+      attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio
 
       def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil)
         @formality = formality
