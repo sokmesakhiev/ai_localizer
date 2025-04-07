@@ -30,7 +30,7 @@ require_relative './ai_localizer/utils/flatten_hash'
 require_relative './ai_localizer/utils/recovery'
 require_relative './ai_localizer/utils/line_by_line'
 require_relative './ai_localizer/utils/signature_generator'
-require_relative './ai_localizer/utils/engine_selector'
+require_relative './ai_localizer/utils/translation_engine_selector'
 require_relative './ai_localizer/utils/file_name_pattern'
 require_relative './ai_localizer/utils/import_existing_translation'
 
@@ -79,6 +79,6 @@ module AiLocalizer
   end
 
   def self.translation_engine(from_lang:, to_lang:)
-    @translation_engine ||= AiLocalizer::Utils::EngineSelector.new(from_lang:, to_lang:).call
+    @translation_engine ||= AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
   end
 end
