@@ -63,7 +63,7 @@ module AiLocalizer
 
   def self.create_locales(template_file_path:, from_lang:, to_langs:, indicator: nil, use_existing_translations: true)
     to_langs.each do |to_lang|
-      engine = translation_engine(from_lang:, to_lang:)
+      engine = AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
 
       next if engine.blank? || template_file_path.blank?
 
@@ -73,11 +73,7 @@ module AiLocalizer
         to_lang:,
         engine:,
         indicator:
-      )
+      ).call
     end
-  end
-
-  def self.translation_engine(from_lang:, to_lang:)
-    @translation_engine ||= AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
   end
 end

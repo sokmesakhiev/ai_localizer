@@ -68,15 +68,15 @@ module AiLocalizer
         translated = []
         texts = for_translation.values
 
-          strings = texts.select { |t| t.is_a?(String) }
-          chunks = chunk_array(strings)
-          chunks.each do |chunk|
-            translations = engine.process(text: chunk)
+        strings = texts.select { |t| t.is_a?(String) }
+        chunks = chunk_array(strings)
+        chunks.each do |chunk|
+          translations = engine.translate(text: chunk)
 
-            translations = [''] * chunk.size if translations.nil?
-            translations = [translations] if translations.is_a?(String)
-            translated += translations
-          end
+          translations = [''] * chunk.size if translations.nil?
+          translations = [translations] if translations.is_a?(String)
+          translated += translations
+        end
 
         translated
       end

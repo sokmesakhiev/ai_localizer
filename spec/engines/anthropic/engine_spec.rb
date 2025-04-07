@@ -7,7 +7,7 @@ RSpec.describe AiLocalizer::Engines::Anthropic::Engine do
     it 'translate with Anthropic engine' do
       engine = described_class.new(from_lang: 'en', to_lang: 'es')
 
-      translation = engine.process(
+      translation = engine.translate(
         text: ['Hello %p#12345678', 'Welcome to "Cambodia"']
       )
 

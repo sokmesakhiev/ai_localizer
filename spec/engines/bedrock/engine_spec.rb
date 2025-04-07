@@ -7,7 +7,7 @@ RSpec.describe AiLocalizer::Engines::Bedrock::Engine do
     it 'translate with Bedrock engine' do
       engine = described_class.new(from_lang: 'en', to_lang: 'es')
 
-      translation = engine.process(
+      translation = engine.translate(
         text: ['Hello %p#12345678', 'Welcome to "Cambodia"']
       )
 

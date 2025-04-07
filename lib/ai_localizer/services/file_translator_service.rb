@@ -29,9 +29,9 @@ module AiLocalizer
         target_file_path = file_name_pattern.target_file_path
 
         source_blocks = extract_data(source_file_path)
-        target_blocks = extract_data(target_file_path)
+        target_blocks = extract_data(target_file_path) if File.file?(target_file_path)
 
-        apply_existing_translations(source_blocks, target_blocks) if use_existing_translations && File.file?(target_file_path)
+        apply_existing_translations(source_blocks, target_blocks) if use_existing_translations && target_blocks.present?
 
         translate_blocks = source_blocks.reject { |block| block[:translation].present? }
 

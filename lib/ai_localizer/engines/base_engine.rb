@@ -17,7 +17,7 @@ module AiLocalizer
         @max_translation_length_ratio = max_translation_length_ratio
       end
 
-      def process(text:)
+      def translate(text:)
         aggregated_translations = []
         prompt_builder = AiLocalizer::Utils::PromptBuilder.new(from_lang:, to_lang:, formality:, max_translation_length_ratio:)
         remaining_texts = create_structured_texts(text)
