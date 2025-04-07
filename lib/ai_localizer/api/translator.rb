@@ -7,11 +7,13 @@ module AiLocalizer
 
       attr_reader :texts, :from_lang, :to_lang, :engine
 
-      def initialize(texts:, from_lang:, to_lang:, engine: nil)
+      def initialize(texts:, from_lang:, to_lang:, engine: nil, formality: nil, max_translation_length_ratio: nil)
         @texts = texts
         @from_lang = from_lang
         @to_lang = to_lang
         @engine = engine || AiLocalizer::Utils::EngineSelector.new(from_lang:, to_lang:).call
+        @formality = formality
+        @max_translation_length_ratio = max_translation_length_ratio
       end
 
       def call

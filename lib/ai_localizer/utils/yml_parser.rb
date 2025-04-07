@@ -4,7 +4,7 @@ module AiLocalizer
   module Utils
     class YmlParser
       PERMITTED_TYPE_CLASSES = [Time, Symbol, String, Array].freeze
-      FILE_PARSER_PAYLOAD_KEYS = %i[path plural context existing_translation original index entry parent_index plural_count signature].freeze
+      FILE_PARSER_PAYLOAD_KEYS = %i[path existing_translation original index signature].freeze
 
       def self.call(*args)
         new(*args).call

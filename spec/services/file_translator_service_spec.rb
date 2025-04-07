@@ -16,7 +16,7 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
     header: Traductor de IA
   # Body content
   body:
-    description: <p>Traductor de IA</p>.
+    description: \"<p>Traductor de IA</p>.\"
     # Author name
     author: Sokmesakhiev
     options:
