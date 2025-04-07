@@ -10,8 +10,8 @@
 # rspec failure tracking
 .rspec_status
 
-# Env file
-.env
+# Ruby version
+.ruby-version
 
 # Mac
 .DS_Store

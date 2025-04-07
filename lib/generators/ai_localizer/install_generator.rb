@@ -6,6 +6,7 @@ module AiLocalizer
 
     def create_initializer_file
       copy_file "ai_localizer_initializer.rb", "config/initializers/ai_localizer.rb"
+      copy_file "ai_localizer.rake", "lib/tasks/ai_localizer.rake"
     end
   end
 end
