@@ -13,63 +13,60 @@ module AiLocalizer
       end
 
       def call
-        new_content = format_yaml(build_translated_yml(translations))
-        significant_change?(content, new_content) ? new_content : content
+        translation_content = format_yaml(build_translated_yml(translations))
+        significant_change?(content, translation_content) ? translation_content : content
       end
 
       protected
 
       def significant_change?(old_content, new_content)
-        old_yaml = parse_yaml(old_content)
-        new_yaml = parse_yaml(new_content)
-        old_yaml != new_yaml
+        parse_yaml(old_content) != parse_yaml(new_content)
       end
 
       def parse_yaml(content)
         Psych.safe_load(content, symbolize_names: true, aliases: true, permitted_classes: [Object])
       end
 
-      def format_yaml(translated_yaml)
-        translated = translated_yaml.split("\n").drop(1)
-        process_format(translated).join("\n")
+      def format_yaml(translated_yaml_str)
+        translated_lines = translated_yaml_str.split("\n").drop(1)
+        integrate_translations_into_source(translated_lines).join("\n")
       end
 
-      def process_format(translated)
-        translated_lines, processing_line_index, translation_index = [], 0, 0
+      def integrate_translations_into_source(translated_lines)
+        result_lines, line_index, translation_index = [], 0, 0
 
-        while processing_line_index < lines.length
-          current_line = lines[processing_line_index] || ''
+        while line_index < lines.length
+          current_line = lines[line_index] || ''
 
           # skip comment lines
           if current_line.strip.start_with?('#') || current_line.strip.empty?
-            translated_lines << current_line
-            translated.shift if translated[0].blank? && current_line.strip.blank?
+            result_lines << current_line
+            translated.shift if translated_lines[0].blank? && current_line.strip.blank?
           else
-            translated_lines << process_translation(current_line.strip, translated, translation_index)
+            result_lines << process_line(current_line.strip, translated_lines, translation_index)
             translation_index += 1 if translations.values[translation_index]
           end
 
           # move to next line
-          processing_line_index += 1
+          line_index += 1
         end
 
-        translated_lines
+        result_lines
       end
 
-      def process_translation(line, translated, translation_index)
-        translated_str = translated.shift || ''
-        key = extract_key(translated_str)
+      def process_line(line, translated_lines, index)
+        translated_line = translated_lines.shift || ''
+        key = extract_key(translated_line)
 
-        return build_inline_translated_array(translated_str, translated) if inline_array?(line)
-        return translated_str unless key
+        return build_inline_translated_array(translated_line, translated_lines) if inline_array?(line)
+        return translated_line unless key
 
-        process_multiline(line, key)
-        options = process_inline_array(line, key)
+        process_multiline_translation(line, key)
+        array_options = process_inline_array(line, key)
 
-        translated_str += " [#{build_option_value(translated, options)}]" if options.any?
-
-        translation_str = build_line(translation_index, key, translated_str)
-        apply_quotation_style(translation_str, translation_index)
+        translated_line += " [#{build_array_translation(translated_lines, array_options)}]" if array_options.any?
+        translation_str = replace_root_locale_key(index, key, translated_line)
+        apply_original_quotation_style(translation_str, index)
       end
 
       def inline_array?(line)
@@ -96,7 +93,7 @@ module AiLocalizer
         "#{key} [#{sanitized_values.join(', ')}]"
       end
 
-      def process_multiline(line, key)
+      def process_multiline_translation(line, key)
         value = extract_value(line)
         return unless value.include?('\\n')
 
@@ -126,13 +123,13 @@ module AiLocalizer
         end
       end
 
-      def build_option_value(translated, options)
+      def build_array_translation(translated, options)
         values = translated.shift(options.size)
         quote = options.first&.match?(/^["']/) ? options.first[0] : ''
         values.map { |v| "#{quote}#{v.strip.delete('- ')}#{quote}" }.join(', ')
       end
 
-      def apply_quotation_style(translated_str, translation_index)
+      def apply_original_quotation_style(translated_str, translation_index)
         original_quotation_style = translations.values[translation_index]['quotation_style']
         return translated_str unless original_quotation_style
 
@@ -162,7 +159,7 @@ module AiLocalizer
         translations.keys.any? { |index| index.include?(key) }
       end
 
-      def build_line(tindex, key, translated_str)
+      def replace_root_locale_key(tindex, key, translated_str)
         is_rails_file? && tindex.zero? && key == from_lang ? translated_str.gsub(/^#{key}/, to_lang) : translated_str
       end
 

@@ -1,4 +1,4 @@
-namespace :i18n do
+namespace :ai_localizer do
   def indicator
     Proc.new do |dirname, lang|
       print "\033[37m -->  #{dirname} : #{lang} .. \033[32m done  \n"
