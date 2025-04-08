@@ -51,6 +51,57 @@ config/initializers/ai_localizer.rb
 
 In the generated initializer, you can configure the gem's behavior. Here's what you need to set:
 
+#### 🇰🇭Choose Your Language Option
+
+Set `config.source_lang` to select a source language for translation.
+
+**Example:**
+
+```ruby
+config.source_lang = "en"
+```
+
+Set `config.target_langs` to select a target language for translation.
+
+**Example:**
+
+```ruby
+config.target_langs = "['kh', 'fr', 'es']"
+```
+
+#### 📖 Choose Your Translation Formality
+
+Set `config.formality` to select a formality level for translation.
+
+- `'formal'`
+- `'informal'`
+
+**Example:**
+
+```ruby
+# Optional
+config.formality = "formal"
+```
+
+#### ⏲ Choose Your Translation Length Intensity
+
+Translation length intensity is an option that strictly limits the length of the translated text relative to the original string. This helps prevent UI layout issues when switching between languages. To enable this, set the max_translation_length_ratio, which defines the maximum allowed length of the translation compared to the original.
+
+Set `config.max_translation_length_ratio` to select a maximum length ratio for translation.
+
+Set `config.translation_length_intensity` to select a length intensity level for translation.
+
+- `'soft'`
+- `'strict'`
+
+**Example:**
+
+```ruby
+# Optional
+config.translation_length_intensity = "strict"
+config.max_translation_length_ratio = 1.2
+```
+
 #### 🔤 Choose Your Translator Engine
 
 Set `config.translator_engine` to select a translation provider. Available options:
@@ -101,7 +152,7 @@ Similar variables are available for `bedrock`, `deepseek`, and `open_ai`.
 Once you've completed the configuration, you can translate your files by running:
 
 ```bash
-bundle exec rails ai_localizer::translate from_lang=en to_langs=fr,es
+bundle exec rails ai_localizer::translate
 ```
 
 The gem will read your source file(s), perform the translation using the selected engine, and generate the corresponding target locale files.

@@ -1,16 +1,16 @@
 en:
   title:
-    welcome: "Hello %{name}"
-    header: "AI translator"
+    welcome: Hello %{name}
+    header: AI Translator
   # Body content
   body:
-    description: "<p>AI translator</p>."
+    description: "<p>AI Translator</p>."
     # Author name
-    author: "Sokmesakhiev"
+    author: Sokmesakhiev
     options:
-      - "Option 1"
-      - "Option 2"
-    choices: ["Hello", "World"]
+      0: Option 1
+      1: Option 2
+    choices: ['Hello', 'World']
   # Footer content
   footer:
-    copyright: "All \"rights\" reserved. Copyright (c) %{year}." #Copyright
+    copyright: All "rights" reserved. Copyright (c) %{year}.

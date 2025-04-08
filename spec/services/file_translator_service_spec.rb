@@ -7,6 +7,15 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
   let(:template_file_path) { 'spec/fixtures/{{lang}}.yml' }
   let(:translated_yml) { File.read(target_file_path) }
   let(:engine) { AiLocalizer::Engines::Bedrock::Engine.new(from_lang: 'en', to_lang: 'es') }
+  let(:translation_settings) do
+    {
+      from_lang: 'en',
+      to_lang: 'es',
+      formality: nil,
+      max_translation_length_ratio: nil,
+      translation_length_intensity: nil
+    }
+  end
 
   context 'without import existing translation' do
     it "parses a valid YML file" do
@@ -27,7 +36,9 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
   footer:
     copyright: Todos los \"derechos\" reservados. Copyright (c) %{year}."
 
-      described_class.new(template_file_path:, from_lang: 'en', to_lang: 'es', engine:, use_existing_translations: false).call
+      translation_settings[:use_existing_translations] = false
+
+      described_class.new(template_file_path:, engine:, translation_settings:).call
 
       expect(File).to exist(target_file_path)
       expect(translated_yml).to eq(expected_yml)
@@ -36,8 +47,9 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
     context 'with import existing translation' do
       it 'does not overwrite existing translation' do
         allow(described_class).to receive(:call)
+        translation_settings[:use_existing_translations] = true
 
-        described_class.new(template_file_path:, from_lang: 'en', to_lang: 'es', engine:, use_existing_translations: true).call
+        described_class.new(template_file_path:, engine:, translation_settings:).call
 
         expect(described_class).not_to have_received(:call)
       end
