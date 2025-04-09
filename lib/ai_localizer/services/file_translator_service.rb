@@ -33,9 +33,9 @@ module AiLocalizer
 
         translate_blocks = source_blocks.reject { |block| block[:translation].present? }
 
-        index = 0
+        completed = 0
         translate_blocks.each_slice(CHUNK_SIZE) do |blocks|
-          print "\033[37m --> Processing #{blocks.size} blocks over #{translate_blocks.size}  .. \n"
+          print "\033[37m --> Processing #{blocks.size} strings over #{translate_blocks.size}  .. \n"
 
           result = AiLocalizer::Services::TranslateChunkService.call(
             blocks:,
@@ -52,8 +52,8 @@ module AiLocalizer
             block[:translation] = result[:translations][signature]
           end
 
-          index += 1
-          print "\033[37m --> Total blocks completed: #{index * CHUNK_SIZE}  .. \n\n"
+          completed += blocks.size
+          print "\033[37m --> Total strings completed: #{completed}  .. \n\n"
         end
 
         AiLocalizer::Services::CreateTranslationFileService.new(
