@@ -66,6 +66,8 @@ module AiLocalizer
     to_langs = JSON.parse(AiLocalizer.config.target_langs)
 
     to_langs.each do |to_lang|
+      print "\e[31m --> Translating file #{path} from #{from_lang} to #{to_lang} .. \e[0m \n"
+
       engine = AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
 
       next if engine.blank? || template_file_path.blank?
@@ -75,14 +77,18 @@ module AiLocalizer
         engine:,
         translation_settings: translation_settings.merge(from_lang:, to_lang:)
       ).call
+
+      print "\e[32m --> Translation done #{path} from #{from_lang} to #{to_lang} .. \e[0m \n"
     end
 
-    def translation_settings
-      {
-        formality: AiLocalizer.config.formality,
-        translation_length_intensity: AiLocalizer.config.translation_length_intensity,
-        max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio
-      }
-    end
+    print "\e[32m --> Done  .. \n\n"
+  end
+
+  def translation_settings
+    {
+      formality: AiLocalizer.config.formality,
+      translation_length_intensity: AiLocalizer.config.translation_length_intensity,
+      max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio
+    }
   end
 end
