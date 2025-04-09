@@ -18,6 +18,7 @@ module AiLocalizer
           block.slice(:index, :translation).stringify_keys
         end
 
+        print "\033[37m --> Formatting #{target_file_path}  .. \n\n"
         content = AiLocalizer::Utils::YmlFormatter.new(
           source_file_path:,
           from_lang:,
@@ -25,6 +26,7 @@ module AiLocalizer
           translations:
         ).call
 
+        print "\033[37m --> Creating #{target_file_path}  .. \n\n"
         File.write(target_file_path, content)
       end
     end
