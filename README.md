@@ -152,7 +152,7 @@ Similar variables are available for `bedrock`, `deepseek`, and `open_ai`.
 Once you've completed the configuration, you can translate your files by running:
 
 ```bash
-bundle exec rails ai_localizer::translate
+bundle exec rails ai_localizer:translate
 ```
 
 The gem will read your source file(s), perform the translation using the selected engine, and generate the corresponding target locale files.
