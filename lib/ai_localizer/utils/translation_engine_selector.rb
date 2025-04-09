@@ -2,7 +2,7 @@
 
 module AiLocalizer
   module Utils
-    class EngineSelector
+    class TranslationEngineSelector
       attr_reader :from_lang, :to_lang
 
       def initialize(from_lang:, to_lang:)

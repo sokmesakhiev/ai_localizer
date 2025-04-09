@@ -3,7 +3,7 @@ source "https://rubygems.org"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'anthropic'
-gem 'aws-sdk-bedrockruntime', '~> 1.29.0'
+gem 'aws-sdk-bedrockruntime', '~> 1.43.0'
 gem "rspec-core"
 gem "rspec-expectations"
 gem "rspec-mocks"
@@ -13,7 +13,6 @@ gem "figaro"
 gem 'ruby-openai'
 gem 'deepseek-client'
 gem 'oj'
-gem "dotenv", "~> 3.1"
 
 # Specify your gem's dependencies in ai_localizer.gemspec
 gemspec

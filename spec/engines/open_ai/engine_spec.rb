@@ -7,10 +7,11 @@ RSpec.describe AiLocalizer::Engines::OpenAi::Engine do
     it 'translate with OpenAI engine' do
       engine = described_class.new(from_lang: 'en', to_lang: 'es')
 
-      translation = engine.process(text: ['Hello %p#12345678', 'How are you?'])
+      translation = engine.translate(
+        text: ['Hello %p#12345678', 'Welcome to "Cambodia"']
+      )
 
-      expect(translation).to eq(['Hola %p#12345678', '¿Cómo está?'])
-      expect(engine.service_name).to eq('OpenAI')
+      expect(translation).to eq(['Hola %p#12345678', 'Bienvenido a "Camboya"'])
     end
   end
 end

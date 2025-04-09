@@ -5,16 +5,17 @@ module AiLocalizer
     class PromptBuilder
       ALLOWED_LENGTH_CONSTRAIN_INTENSITY = %w[hard].freeze
 
-      attr_reader :from_lang, :to_lang, :formality
+      attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio
 
-      def initialize(from_lang:, to_lang:, formality: nil)
+      def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil)
         @formality = formality
+        @max_translation_length_ratio = max_translation_length_ratio
         @from_lang = from_lang
         @to_lang = to_lang
       end
 
       def render(content: nil)
-        params = { source_language_name:, target_language_name:, formality_prompt: }
+        params = { source_language_name:, target_language_name:, formality_prompt:, restrict_translation_length_result_prompt: }
 
         user_prompt_parameters = if content.nil?
                                    params
@@ -29,18 +30,19 @@ module AiLocalizer
 
       private
 
-      def translation_length_prompt
-        return '' if translation_max_length.blank? || ALLOWED_LENGTH_CONSTRAIN_INTENSITY.exclude?(max_length_prompt_intensity)
-        return @translation_length_prompt if defined?(@translation_length_prompt)
+      def restrict_translation_length_result_prompt
+        return '' if max_translation_length_ratio.blank?
+
+        return @restrict_translation_length_result_prompt if defined?(@restrict_translation_length_result_prompt)
 
         length_prompt = case max_length_prompt_intensity
                         when 'hard'
                           prompt_template.hard_translation_length_prompt
                         else
-                          ''
+                          prompt_template.hard_translation_length_prompt
                         end
 
-        @translation_length_prompt = interpolate(length_prompt, { translation_max_length: })
+        @restrict_translation_length_result_prompt = interpolate(length_prompt, { translation_max_length: })
       end
 
       def formality_prompt
@@ -68,7 +70,8 @@ module AiLocalizer
       end
 
       def load_prompts
-        file_path = ('./config/prompt.yml')
+        gem_root = Gem.loaded_specs['ai_localizer'].full_gem_path
+        file_path = File.join(gem_root, 'config', 'prompt.yml')
         prompts_data = YAML.load_file(file_path)
 
         prompts_data.transform_keys(&:to_sym) || {}

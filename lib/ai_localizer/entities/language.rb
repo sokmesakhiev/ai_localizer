@@ -12,6 +12,7 @@ module AiLocalizer
         "es" => "Spanish",
         "et" => "Estonian",
         "fi" => "Finnish",
+        "fr" => "French",
         "hu" => "Hungarian",
         "id" => "Indonesian",
         "ja" => "Japanese",

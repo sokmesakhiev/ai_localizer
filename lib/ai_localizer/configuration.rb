@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
-require 'dotenv/load'
 
 module AiLocalizer
   class Configuration
@@ -10,9 +9,16 @@ module AiLocalizer
                   :bedrock_aws_http_read_timeout, :bedrock_aws_retry_limit, :bedrock_aws_session_token,
                   :anthropic_api_key, :anthropic_api_version, :anthropic_model, :deepseek_access_token,
                   :deepseek_model, :source_file_paths, :open_ai_access_token, :open_ai_model,
-                  :open_ai_organization_id, :open_ai_uri_base
+                  :open_ai_organization_id, :open_ai_uri_base, :source_lang, :target_langs, :formality,
+                  :translation_length_intensity, :max_translation_length_ratio
 
     def initialize
+      @source_lang = 'en'
+      @target_langs = []
+      @formality = nil
+      @translation_length_intensity = nil
+      @max_translation_length_ratio = nil
+
       @translator_engine = 'anthropic'
       @source_file_paths = []
 
@@ -24,11 +30,11 @@ module AiLocalizer
       @bedrock_aws_http_open_timeout = 60
       @bedrock_aws_http_read_timeout = 120
       @bedrock_aws_retry_limit = 10
-      @bedrock_aws_session_token = nil
+      @bedrock_aws_sesion_token = nil
 
       @anthropic_api_key = ENV['ANTHROPIC_API_KEY']
       @anthropic_api_version = '2023-06-01'
-      @anthropic_model = 'claude-3-5-sonnet-20240620'
+      @anthropic_model = 'claude-3-7-sonnet-20250219'
 
       @open_ai_access_token = ENV['OPEN_AI_ACCESS_TOKEN']
       @open_ai_model = 'gpt-4o'

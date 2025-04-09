@@ -6,10 +6,6 @@ module AiLocalizer
       class Engine < AiLocalizer::Engines::BaseEngine
         REQUEST_TIMEOUT = 120
 
-        def service_name
-          'AnthropicAPI'
-        end
-
         private
 
         def client
