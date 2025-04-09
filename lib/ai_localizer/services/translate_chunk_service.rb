@@ -5,7 +5,7 @@ module AiLocalizer
     class TranslateChunkService
       attr_reader :file_path, :from_lang, :to_lang, :engine, :indicator, :text, :original_text, :failed_translations
 
-      def initialize(blocks:, from_lang:, to_lang:, engine:)
+      def initialize(blocks:, engine:, from_lang:, to_lang:, formality: nil, translation_length_intensity: nil, max_translation_length_ratio: nil)
         @blocks = blocks
         @from_lang = from_lang
         @to_lang = to_lang

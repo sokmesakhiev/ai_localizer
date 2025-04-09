@@ -18,16 +18,16 @@ RSpec.describe AiLocalizer::Utils::YmlParser do
         {
           existing_translation: nil,
           index: %w[en title header],
-          original: 'AI translator',
+          original: 'AI Translator',
           path: 'spec/fixtures/en.yml',
-          signature: '3df4a151dd994baf489f5bd4f543a1ff'
+          signature: '2bd31cc40c12d5fc98ba6dd6a5b5769b'
         },
         {
           existing_translation: nil,
           index: %w[en body description],
-          original: '<p>AI translator</p>.',
+          original: '<p>AI Translator</p>.',
           path: 'spec/fixtures/en.yml',
-          signature: '81e06b692e478f376971717e2258143e'
+          signature: 'eef83bb4417ac4f6a2f2c6dd7a5b6042'
         },
         {
           existing_translation: nil,

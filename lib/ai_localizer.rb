@@ -61,7 +61,10 @@ require_relative './ai_localizer/engines/deepseek/response'
 module AiLocalizer
   configure {}
 
-  def self.create_locales(template_file_path:, from_lang:, to_langs:, indicator: nil, use_existing_translations: true)
+  def self.create_locales(template_file_path:)
+    from_lang = AiLocalizer.config.source_lang
+    to_langs = JSON.parse(AiLocalizer.config.target_langs)
+
     to_langs.each do |to_lang|
       engine = AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
 
@@ -69,11 +72,17 @@ module AiLocalizer
 
       translations = AiLocalizer::Services::FileTranslatorService.new(
         template_file_path:,
-        from_lang:,
-        to_lang:,
         engine:,
-        indicator:
+        translation_settings: translation_settings.merge(from_lang:, to_lang:)
       ).call
+    end
+
+    def translation_settings
+      {
+        formality: AiLocalizer.config.formality,
+        translation_length_intensity: AiLocalizer.config.translation_length_intensity,
+        max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio
+      }
     end
   end
 end

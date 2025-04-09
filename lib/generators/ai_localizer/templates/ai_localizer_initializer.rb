@@ -1,6 +1,23 @@
 # frozen_string_literal: true
 
 AiLocalizer.configure do |config|
+  # Source language iso
+  config.source_lang = Figaro.env.SOURCE_LANG || 'en'
+
+  # Target languages iso
+  config.target_langs = Figaro.env.TARGET_LANGS || '[]'
+
+  # Formality
+  # Options: 'formal', 'informal'
+  config.formality = Figaro.env.FORMALITY
+
+  # Translation length intensity
+  # Options: 'soft', 'strict'
+  config.translation_length_intensity = Figaro.env.TRANSLATION_LENGTH_INTENSITY
+
+  # Max translation length ratio
+  config.max_translation_length_ratio = Figaro.env.MAX_TRANSLATION_LENGTH_RATIO
+
   # Translator engine
   # Options: 'bedrock', 'anthropic', 'deepseek', 'open_ai'
   config.translator_engine = Figaro.env.TRANSLATOR_ENGINE || 'anthropic'
