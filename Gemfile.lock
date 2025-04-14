@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    ai_localizer (0.1.1)
+    ai_localizer (0.1.2)
       anthropic
       aws-sdk-bedrockruntime
       deepseek-client
+      faraday
       nokogiri
       ruby-openai
 
@@ -165,6 +166,10 @@ GEM
     rubocop-ast (1.44.0)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
+    ruby-anthropic (0.4.2)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     ruby-openai (8.0.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
@@ -186,12 +191,12 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   ai_localizer!
-  anthropic
   aws-sdk-bedrockruntime (~> 1.44.0)
   bundler (~> 2.3.17)
   deepseek-client
   faker
   fakeweb
+  faraday
   figaro
   oj
   pry (~> 0.13)
@@ -204,6 +209,7 @@ DEPENDENCIES
   rspec-rails
   rspec-support
   rubocop
+  ruby-anthropic
   ruby-openai
 
 BUNDLED WITH

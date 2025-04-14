@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ruby-openai'
   spec.add_dependency 'aws-sdk-bedrockruntime'
   spec.add_dependency 'deepseek-client'
+  spec.add_dependency 'faraday'
 
   spec.add_development_dependency "bundler", "~> 2.3.17"
   spec.add_development_dependency "rake", "~> 10.0"
