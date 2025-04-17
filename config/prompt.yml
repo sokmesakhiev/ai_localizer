@@ -1,30 +1,29 @@
 system_prompt: |-
   You are a professional translator. Ensure all translations follow the standard grammar, vocabulary, and capitalization rules for ${{target_language_name}}.
 
-user_prompt: >
+user_prompt: |-
   Translate the following content from ${{source_language_name}} to ${{target_language_name}}. Ensure the translations are accurate, context-aware, and appropriate for use in an application, with particular attention to any technical or domain-specific terminology.
 
-  ## Input Format:
+  Input Format:
   - You will receive an array of text objects in JSON format, like this:
     [{"id": "123", "text": "Here will be text “1” to be translated"}, {"id": "456", "text": "Here will be text 2 to be translated"}].
 
-  ## Guidelines:
+  Guidelines:
   - ${{formality_prompt}}
   - All texts originate from the same screen or page, so use contextual cues across entries to ensure consistent and coherent translations.
   - Each translation must **preserve the original meaning and tone**, while being natural and idiomatic in the target language.
-  - ${{restrict_translation_length_result_prompt}}
+  ${{restrict_translation_length_result_prompt}}
 
-  ## Output Format:
+  Output Format:
   - Respond with a single JSON object mapping each "id" to its translated string.
   - The output must strictly follow this structure:
     {"123": "Translated text 1", "456": "Translated text 2"}
   - **Do not include any additional text, explanations, or formatting outside this JSON object.**
 
-  ## Content to Translate:
-  ${{content}}
+  Content to Translate: ${{content}}
 
-soft_length_prompt: "- The total length of the translations must be equal to or less than ${{translation_max_length}}% of the original text length, while still sounding natural and complete."
-strict_length_prompt: "- The total length of the translations must not exceed ${{translation_max_length}}% of the original text length, even if this results in minor compromises in fluency."
+soft_length_prompt: "- The total length of the translations must be equal to or less than ${{percentage}}% of the original text length, while still sounding natural and complete."
+strict_length_prompt: "- The total length of the translations must not exceed ${{percentage}}% of the original text length, even if this results in minor compromises in fluency."
 formality_prompt: "Use very formal language, as used by highly educated speakers in official settings."
 informality_prompt: "Use very casual and friendly language, as used in informal conversations among close friends."
 neutral_formality_prompt: "Maintain a neutral level of formality, ensuring consistency across all texts without mixing formal and informal styles."

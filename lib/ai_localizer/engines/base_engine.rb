@@ -8,21 +8,20 @@ module AiLocalizer
       TRANSLATION_TO_SOURCE_LENGTH_RATIO = 1.5
       IDEAL_BATCH_SIZE = (MAX_OUTPUT_TOKENS / TRANSLATION_TO_SOURCE_LENGTH_RATIO).to_i
 
-      attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio
+      attr_reader :from_lang, :to_lang
 
-      def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil)
+      def initialize(from_lang:, to_lang:)
         @from_lang = from_lang
         @to_lang = to_lang
-        @formality = formality
-        @max_translation_length_ratio = max_translation_length_ratio
       end
 
-      def translate(text:)
+      def translate(text:, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
         prompt_builder = AiLocalizer::Utils::PromptBuilder.new(
-          from_lang: from_lang,
-          to_lang: to_lang,
-          formality: formality,
-          max_translation_length_ratio: max_translation_length_ratio
+          from_lang:,
+          to_lang:,
+          formality:,
+          max_translation_length_ratio:,
+          translation_length_intensity:
         )
 
         structured_texts = structure_texts(text)
@@ -36,7 +35,7 @@ module AiLocalizer
           batches = create_batches(pending_texts, input_token_limit)
 
           batches.each do |batch|
-            prompt = prompt_builder.render(content: Oj.dump(batch, mode: :compat))
+            prompt = prompt_builder.build_prompt(content: Oj.dump(batch, mode: :compat))
             translated = client.translate(text: batch, **prompt)
 
             if translated.any?
