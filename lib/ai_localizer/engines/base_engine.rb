@@ -3,10 +3,10 @@
 module AiLocalizer
   module Engines
     class BaseEngine
-      CONTEXT_WINDOW = 200_000 # LLM's working memory (input + output text)
-      MAX_OUTPUT_TOKENS = 8_000 # Max tokens allowed in the LLM's response
-      TRANSLATION_TO_SOURCE_LENGTH_RATIO = 1.5 # Estimated expansion factor for translation
-      IDEAL_BATCH_SIZE = (MAX_OUTPUT_TOKENS / TRANSLATION_TO_SOURCE_LENGTH_RATIO).to_i # ideal size (in tokens) of one batch of original text in one request to the LLM
+      CONTEXT_WINDOW = 200_000               # LLM's full token capacity (input + output)
+      MAX_OUTPUT_TOKENS = 8_000              # Max tokens in LLM's response
+      TRANSLATION_TO_SOURCE_LENGTH_RATIO = 1.5
+      IDEAL_BATCH_SIZE = (MAX_OUTPUT_TOKENS / TRANSLATION_TO_SOURCE_LENGTH_RATIO).to_i
 
       attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio
 
@@ -18,92 +18,90 @@ module AiLocalizer
       end
 
       def translate(text:)
-        aggregated_translations = []
+        prompt_builder = AiLocalizer::Utils::PromptBuilder.new(
+          from_lang: from_lang,
+          to_lang: to_lang,
+          formality: formality,
+          max_translation_length_ratio: max_translation_length_ratio
+        )
 
-        prompt_builder = AiLocalizer::Utils::PromptBuilder.new(from_lang:, to_lang:, formality:, max_translation_length_ratio:)
-        remaining_texts = create_structured_texts(text)
+        structured_texts = structure_texts(text)
+        prompt = prompt_builder.build_prompt
+        input_token_limit = calculate_available_input_tokens(prompt)
 
-        minimal_prompt = prompt_builder.render
-        max_input_size = free_space_size(minimal_prompt)
+        results = {}
+        pending_texts = structured_texts.dup
 
-        batches = create_batches(remaining_texts, max_input_size)
-
-        loop do
-          break if batches.empty?
+        while pending_texts.any?
+          batches = create_batches(pending_texts, input_token_limit)
 
           batches.each do |batch|
             prompt = prompt_builder.render(content: Oj.dump(batch, mode: :compat))
-            translated_items = client.translate(text: batch, **prompt)
+            translated = client.translate(text: batch, **prompt)
 
-            if translated_items.any?
-              translated_items.each do |key, value|
-                aggregated_translations[key.to_i] = value
-                remaining_texts.delete(key.to_i)
+            if translated.any?
+              translated.each do |key, value|
+                results[key.to_i] = value
+                pending_texts.delete(key.to_i)
               end
             else
-              remaining_texts.shift
+              # fallback: remove first entry to prevent infinite loop
+              pending_texts.shift
             end
-
-            batches = create_batches(remaining_texts, max_input_size)
           end
         end
 
-        aggregated_translations
+        results.sort.to_h.values
       end
 
       private
 
-      def create_structured_texts(texts)
-        texts.each_with_index.each_with_object({}) do |(text, idx), result|
-          result[idx] = { 'id' => idx.to_s, 'text' => text }
+      def structure_texts(texts)
+        texts.each_with_index.to_h do |text, idx|
+          [idx, { 'id' => idx.to_s, 'text' => text }]
         end
       end
 
-      def create_batches(blocks, max_input_size)
+      def create_batches(items, max_tokens)
         batches = []
         current_batch = []
-        current_batch_tokens = 0
+        current_tokens = 0
 
-        blocks.each_value do |block|
-          text = block.to_s
-          line_tokens = get_token_count_by_model(text:)
+        items.each_value do |block|
+          block_text = block.to_s
+          tokens = token_count(block_text)
 
-          if line_tokens > max_input_size
-            next
-          end
+          next if tokens > max_tokens
 
-          if (current_batch_tokens + line_tokens) <= max_input_size
+          if (current_tokens + tokens) <= max_tokens
             current_batch << block
-            current_batch_tokens += line_tokens
+            current_tokens += tokens
           else
             batches << current_batch unless current_batch.empty?
             current_batch = [block]
-            current_batch_tokens = line_tokens
+            current_tokens = tokens
           end
         end
 
         batches << current_batch unless current_batch.empty?
+
         batches
       end
 
-      def free_space_size(prompt)
-        template_prompt_size = used_tokens_count(prompt)
-
-        available_input_tokens = CONTEXT_WINDOW - MAX_OUTPUT_TOKENS - template_prompt_size
-
-        [IDEAL_BATCH_SIZE, available_input_tokens].min
+      def calculate_available_input_tokens(prompt)
+        used_tokens = count_prompt_tokens(prompt)
+        [IDEAL_BATCH_SIZE, CONTEXT_WINDOW - MAX_OUTPUT_TOKENS - used_tokens].min
       end
 
-      def used_tokens_count(prompt)
-        request_body = [
+      def count_prompt_tokens(prompt)
+        request_structure = [
           { 'role' => 'system', 'content' => prompt[:system_prompt] },
           { 'role' => 'user', 'content' => prompt[:user_prompt] }
         ]
-
-        get_token_count_by_model(text: request_body.to_json)
+        token_count(request_structure.to_json)
       end
 
-      def get_token_count_by_model(text:)
+      def token_count(text)
         OpenAI.rough_token_count(text)
       end
     end

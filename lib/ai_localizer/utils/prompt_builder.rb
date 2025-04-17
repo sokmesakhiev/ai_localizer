@@ -14,14 +14,9 @@ module AiLocalizer
         @to_lang = to_lang
       end
 
-      def render(content: nil)
+      def build_prompt
         params = { source_language_name:, target_language_name:, formality_prompt:, restrict_translation_length_result_prompt: }
 
-        user_prompt_parameters = if content.nil?
-                                   params
-                                 else
-                                   params.merge(content:)
-                                 end
         {
           system_prompt: interpolate(prompt_template[:system_prompt], params).chomp,
           user_prompt: interpolate(prompt_template[:user_prompt], user_prompt_parameters)
@@ -36,10 +31,12 @@ module AiLocalizer
         return @restrict_translation_length_result_prompt if defined?(@restrict_translation_length_result_prompt)
 
         length_prompt = case max_length_prompt_intensity
-                        when 'hard'
-                          prompt_template.hard_translation_length_prompt
+                        when 'strict'
+                          prompt_template[:strict_length_prompt]
+                        when 'soft'
+                          prompt_template[:soft_length_prompt]
                         else
-                          prompt_template.hard_translation_length_prompt
+                          ''
                         end
 
         @restrict_translation_length_result_prompt = interpolate(length_prompt, { translation_max_length: })
@@ -47,9 +44,9 @@ module AiLocalizer
 
       def formality_prompt
         @formality_prompt ||= case formality.to_s
-                              when 'more'
+                              when 'formal'
                                 prompt_template[:more_formality_prompt]
-                              when 'less'
+                              when 'informal'
                                 prompt_template[:less_formality_prompt]
                               else
                                 prompt_template[:neutral_formality_prompt]
