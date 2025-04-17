@@ -5,15 +5,16 @@ module AiLocalizer
     class Translator
       CHUNK_SIZE = 100
 
-      attr_reader :texts, :from_lang, :to_lang, :engine, :formality, :max_translation_length_ratio
+      attr_reader :texts, :from_lang, :to_lang, :engine, :formality, :max_translation_length_ratio, :translation_length_intensity
 
-      def initialize(texts:, from_lang:, to_lang:, engine: nil, formality: nil, max_translation_length_ratio: nil)
+      def initialize(texts:, from_lang:, to_lang:, engine: nil, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
         @texts = texts
         @from_lang = from_lang
         @to_lang = to_lang
         @engine = engine || AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
         @formality = formality
         @max_translation_length_ratio = max_translation_length_ratio
+        @translation_length_intensity = translation_length_intensity
       end
 
       def call
@@ -25,7 +26,8 @@ module AiLocalizer
             to_lang:,
             engine:,
             formality:,
-            **translation_length_intensity
+            max_translation_length_ratio:,
+            translation_length_intensity:
           ).call
 
           blocks.each do |block|
@@ -38,12 +40,6 @@ module AiLocalizer
       end
 
       private
-
-      def translation_length_intensity
-        return {} if max_translation_length_ratio.blank?
-
-        { translation_length_intensity: 'strict', max_translation_length_ratio: }
-      end
 
       def build_block(texts:)
         blocks = []

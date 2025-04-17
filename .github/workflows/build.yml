@@ -1,5 +1,9 @@
 name: Ruby Gem
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   pull_request:
     branches: [ "develop", "main" ]
@@ -35,3 +39,4 @@ jobs:
         BEDROCK_AWS_SECRET_ACCESS_KEY: ${{ secrets.BEDROCK_AWS_SECRET_ACCESS_KEY }}
         DEEPSEEK_ACCESS_TOKEN: ${{ secrets.DEEPSEEK_ACCESS_TOKEN }}
         OPEN_AI_ACCESS_TOKEN: ${{ secrets.OPEN_AI_ACCESS_TOKEN }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

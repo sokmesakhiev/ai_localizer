@@ -3,9 +3,10 @@
 module AiLocalizer
   module Services
     class TranslateChunkService
-      attr_reader :file_path, :from_lang, :to_lang, :engine, :indicator, :text, :original_text, :failed_translations
+      attr_reader :file_path, :from_lang, :to_lang, :engine, :indicator, :text, :original_text, :failed_translations,
+                  :formality, :max_translation_length_ratio, :translation_length_intensity
 
-      def initialize(blocks:, engine:, from_lang:, to_lang:, formality: nil, translation_length_intensity: nil, max_translation_length_ratio: nil)
+      def initialize(blocks:, engine:, from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
         @blocks = blocks
         @from_lang = from_lang
         @to_lang = to_lang
@@ -13,6 +14,9 @@ module AiLocalizer
         @text = blocks.to_h { |tm| [tm[:signature], tm[:original]] }
         @original_text = text&.transform_values(&:dup)
         @failed_translations = []
+        @formality = formality
+        @max_translation_length_ratio = max_translation_length_ratio
+        @translation_length_intensity = translation_length_intensity
       end
 
       def self.call(**args)
@@ -71,7 +75,7 @@ module AiLocalizer
         strings = texts.select { |t| t.is_a?(String) }
         chunks = chunk_array(strings)
         chunks.each do |chunk|
-          translations = engine.translate(text: chunk)
+          translations = engine.translate(text: chunk, formality:, max_translation_length_ratio:, translation_length_intensity:)
 
           translations = [''] * chunk.size if translations.nil?
           translations = [translations] if translations.is_a?(String)

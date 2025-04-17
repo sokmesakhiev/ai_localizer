@@ -50,4 +50,8 @@ AiLocalizer.configure do |config|
   config.open_ai_organization_id = Figaro.env.OPENAI_ORGANIZATION_ID
   config.open_ai_uri_base = Figaro.env.OPENAI_API_BASE || 'https://api.openai.com/v1'
   config.open_ai_model = Figaro.env.OPENAI_MODEL || 'gpt-4o'
+
+  # Gemini configuration
+  config.gemini_api_key = Figaro.env.GEMINI_API_KEY
+  config.gemini_model = Figaro.env.GEMINI_MODEL || 'gemini-2.0-flash'
 end

@@ -20,6 +20,8 @@ module AiLocalizer
                    AiLocalizer::Engines::Deepseek::Engine
                  when 'open_ai'
                    AiLocalizer::Engines::OpenAi::Engine
+                 else
+                   AiLocalizer::Engines::Gemini::Engine
                  end
 
         engine.new(from_lang:, to_lang:)

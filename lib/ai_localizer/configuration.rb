@@ -9,8 +9,8 @@ module AiLocalizer
                   :bedrock_aws_http_read_timeout, :bedrock_aws_retry_limit, :bedrock_aws_session_token,
                   :anthropic_api_key, :anthropic_api_version, :anthropic_model, :deepseek_access_token,
                   :deepseek_model, :source_file_paths, :open_ai_access_token, :open_ai_model,
-                  :open_ai_organization_id, :open_ai_uri_base, :source_lang, :target_langs, :formality,
-                  :translation_length_intensity, :max_translation_length_ratio
+                  :open_ai_organization_id, :open_ai_uri_base, :gemini_api_key, :gemini_model,
+                  :source_lang, :target_langs, :formality, :translation_length_intensity, :max_translation_length_ratio
 
     def initialize
       @source_lang = 'en'
@@ -40,6 +40,9 @@ module AiLocalizer
       @open_ai_model = 'gpt-4o'
       @open_ai_organization_id = ''
       @open_ai_uri_base = 'https://api.openai.com/v1'
+
+      @gemini_api_key = ENV['GEMINI_API_KEY']
+      @gemini_model = 'gemini-2.0-flash'
 
       @deepseek_access_token = ENV['DEEPSEEK_ACCESS_TOKEN']
       @deepseek_model = 'deepseek-chat'
