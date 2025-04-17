@@ -57,6 +57,10 @@ require_relative './ai_localizer/engines/deepseek/engine'
 require_relative './ai_localizer/engines/deepseek/client'
 require_relative './ai_localizer/engines/deepseek/request'
 require_relative './ai_localizer/engines/deepseek/response'
+require_relative './ai_localizer/engines/gemini/engine'
+require_relative './ai_localizer/engines/gemini/client'
+require_relative './ai_localizer/engines/gemini/request'
+require_relative './ai_localizer/engines/gemini/response'
 
 module AiLocalizer
   configure {}
