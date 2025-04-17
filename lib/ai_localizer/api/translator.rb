@@ -5,19 +5,15 @@ module AiLocalizer
     class Translator
       CHUNK_SIZE = 100
 
-      attr_reader :texts, :from_lang, :to_lang, :engine, :formality, :max_translation_length_ratio, :translation_length_intensity
+      attr_reader :from_lang, :to_lang, :engine
 
-      def initialize(texts:, from_lang:, to_lang:, engine: nil, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
-        @texts = texts
+      def initialize(from_lang:, to_lang:, engine: nil)
         @from_lang = from_lang
         @to_lang = to_lang
         @engine = engine || AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
-        @formality = formality
-        @max_translation_length_ratio = max_translation_length_ratio
-        @translation_length_intensity = translation_length_intensity
       end
 
-      def call
+      def translate(texts:, formality: nil, translation_length_intensity: nil, max_translation_length_ratio: nil)
         source_blocks = build_block(texts:)
         source_blocks.each_slice(CHUNK_SIZE) do |blocks|
           result = AiLocalizer::Services::TranslateChunkService.new(

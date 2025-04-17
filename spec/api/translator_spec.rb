@@ -10,7 +10,7 @@ RSpec.describe AiLocalizer::Api::Translator do
       'All "rights" reserved. Copyright (c) %{year}.'
     ]
 
-    result = described_class.new(texts:, from_lang: 'en', to_lang: 'es').call
+    result = described_class.new(from_lang: 'en', to_lang: 'es').translate(texts:)
 
     expect(result).to eq(
       [

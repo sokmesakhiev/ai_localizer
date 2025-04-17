@@ -93,7 +93,8 @@ module AiLocalizer
     {
       formality: AiLocalizer.config.formality,
       translation_length_intensity: AiLocalizer.config.translation_length_intensity,
-      max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio
+      max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio,
+      use_existing_translations: AiLocalizer.config.use_existing_translations
     }
   end
 end

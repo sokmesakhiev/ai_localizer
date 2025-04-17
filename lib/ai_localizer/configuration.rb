@@ -9,7 +9,7 @@ module AiLocalizer
                   :bedrock_aws_http_read_timeout, :bedrock_aws_retry_limit, :bedrock_aws_session_token,
                   :anthropic_api_key, :anthropic_api_version, :anthropic_model, :deepseek_access_token,
                   :deepseek_model, :source_file_paths, :open_ai_access_token, :open_ai_model,
-                  :open_ai_organization_id, :open_ai_uri_base, :gemini_api_key, :gemini_model,
+                  :open_ai_organization_id, :open_ai_uri_base, :gemini_api_key, :gemini_model, :use_existing_translations,
                   :source_lang, :target_langs, :formality, :translation_length_intensity, :max_translation_length_ratio
 
     def initialize
@@ -18,6 +18,7 @@ module AiLocalizer
       @formality = nil
       @translation_length_intensity = nil
       @max_translation_length_ratio = nil
+      @use_existing_translations = true
 
       @translator_engine = 'anthropic'
       @source_file_paths = []
