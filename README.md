@@ -110,6 +110,7 @@ Set `config.translator_engine` to select a translation provider. Available optio
 - `'anthropic'`
 - `'deepseek'`
 - `'open_ai'`
+- `'gemini'`
 
 #### 📁 Define Source File Paths
 
@@ -143,8 +144,31 @@ ANTHROPIC_API_VERSION: "2023-06-01"
 ANTHROPIC_MODEL: "claude-3-7-sonnet-20250219"
 ```
 
-Similar variables are available for `bedrock`, `deepseek`, and `open_ai`.
+Similar variables are available for `bedrock`, `deepseek`, `gemini`, and `open_ai`.
 
+---
+
+**Gemini example (via `application.yml`):**
+
+```yaml
+GEMINI_API_KEY: "your_api_key"
+GEMINI_MODEL: "gemini-2.0-flash"
+```
+
+How to Get a Gemini API Key:
+
+1. ***Go to the API key page***
+   Visit: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+
+2. ***Create a new API key***
+   Click **"Create API Key"** and copy it for use in your application.
+
+3. ***Activate your API key with billing***
+   To use the Gemini API (even on the free tier), you need a billing account.
+
+   - If you don’t have one, visit:
+     [https://aistudio.google.com/app/plan_information](https://aistudio.google.com/app/plan_information)
+   - Click **"Set up Billing"** and follow the steps to activate your free plan.
 ---
 
 ## 🎯 Translating I18n Files

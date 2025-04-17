@@ -4,6 +4,8 @@ module AiLocalizer
   module Engines
     module Gemini
       class Client
+        attr_reader :client_params
+
         def initialize(client_params)
           @client_params = client_params
         end
@@ -22,7 +24,7 @@ module AiLocalizer
         end
 
         def request
-          @request ||= AiLocalizer::Engines::Gemini::Request.new(@client_params)
+          @request ||= AiLocalizer::Engines::Gemini::Request.new(client_params)
         end
       end
     end

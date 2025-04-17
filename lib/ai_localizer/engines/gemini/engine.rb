@@ -12,8 +12,8 @@ module AiLocalizer
 
         def client_params
           {
-            gemini_access_token: AiLocalizer.config.open_ai_access_token,
-            gemini_model: AiLocalizer.config.open_ai_model,
+            gemini_api_key: AiLocalizer.config.gemini_api_key,
+            gemini_model: AiLocalizer.config.gemini_model,
           }
         end
       end

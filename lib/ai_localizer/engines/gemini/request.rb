@@ -4,26 +4,28 @@ module AiLocalizer
   module Engines
     module Gemini
       class Request
-        attr_reader :access_token, :model
+        attr_reader :api_key, :model
 
         def initialize(client_params)
-          @access_token = client_params[:open_ai_access_token]
-          @model = client_params[:open_ai_model]
+          @api_key = client_params[:gemini_api_key]
+          @model = client_params[:gemini_model]
         end
 
         def execute(system_prompt, user_prompt)
+          payload = [system_prompt, user_prompt].join("\n")
+
           Faraday.post("https://generativelanguage.googleapis.com/v1beta/models/#{model}:generateContent") do |req|
-            req.params['key'] = access_token
+            req.params['key'] = api_key
             req.headers['Content-Type'] = 'application/json'
             req.body = {
               contents: [
                 {
                   parts: [
-                    { text: "Explain how AI works" }
+                    { text: payload }
                   ]
                 }
               ]
-            }
+            }.to_json
           end
         end
       end
