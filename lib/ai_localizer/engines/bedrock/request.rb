@@ -4,7 +4,8 @@ module AiLocalizer
   module Engines
     module Bedrock
       class Request
-        attr_reader :api_version, :model_id, :max_tokens, :region, :access_key_id, :secret_access_key, :http_open_timeout, :http_read_timeout, :retry_limit, :session_token
+        attr_reader :api_version, :model_id, :max_tokens, :region, :access_key_id, :secret_access_key,
+                    :http_open_timeout, :http_read_timeout, :retry_limit, :session_token
 
         def initialize(client_params)
           @model_id = client_params[:model]
@@ -29,7 +30,7 @@ module AiLocalizer
             messages: [{ role: 'user', content: user_prompt }]
           }.to_json
 
-          size_in_bytes = body.bytesize
+          body.bytesize
 
           response = client.invoke_model(
             {

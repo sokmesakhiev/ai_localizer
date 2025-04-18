@@ -3,15 +3,21 @@
 module AiLocalizer
   module Utils
     class TranslationEngineSelector
-      attr_reader :from_lang, :to_lang
+      attr_reader :from_lang, :to_lang, :engine_type
 
-      def initialize(from_lang:, to_lang:)
+      def self.call(**args)
+        new(**args).call
+      end
+
+      def initialize(engine_type:, from_lang:, to_lang:)
         @from_lang = from_lang
         @to_lang = to_lang
+        @engine_type = engine_type
       end
 
       def call
-        engine = case AiLocalizer.config.translator_engine
+        binding.pry
+        engine = case engine_type
                  when 'bedrock'
                    AiLocalizer::Engines::Bedrock::Engine
                  when 'anthropic'

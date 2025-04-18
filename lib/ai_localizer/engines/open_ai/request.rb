@@ -14,7 +14,7 @@ module AiLocalizer
         end
 
         def execute(system_prompt, user_prompt)
-          response = open_ai_client.chat(
+          open_ai_client.chat(
             parameters: {
               model:,
               messages: [

@@ -1,1 +1,1 @@
-require_relative "ai_localizer/install_generator"
+require_relative 'ai_localizer/install_generator'

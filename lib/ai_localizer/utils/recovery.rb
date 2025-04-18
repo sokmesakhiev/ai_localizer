@@ -26,7 +26,7 @@ module AiLocalizer
           strategy_class = config[:strategy]
           max_attempts = config[:max_attempts]
 
-          max_attempts.times do |attempt|
+          max_attempts.times do |_attempt|
             result = strategy_class.new(result).call
 
             return result if result.is_a?(Hash)
@@ -36,7 +36,7 @@ module AiLocalizer
           end
         end
         {}
-      rescue JSON::ParserError => e
+      rescue JSON::ParserError
         {}
       end
 
@@ -46,7 +46,7 @@ module AiLocalizer
 
       def valid_json_or_nil(str)
         JSON.parse(str)
-      rescue JSON::ParserError => e
+      rescue JSON::ParserError
         nil
       end
     end

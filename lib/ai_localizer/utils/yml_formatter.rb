@@ -33,7 +33,9 @@ module AiLocalizer
       end
 
       def integrate_translations_into_source(translated_lines)
-        result_lines, line_index, translation_index = [], 0, 0
+        result_lines = []
+        line_index = 0
+        translation_index = 0
 
         while line_index < lines.length
           current_line = lines[line_index] || ''
@@ -81,7 +83,7 @@ module AiLocalizer
             values[index] = t.strip.delete("#{index}: ")
             index += 1
           else
-            (index).times { translated.shift } if index > 0
+            index.times { translated.shift } if index > 0
             break
           end
         end

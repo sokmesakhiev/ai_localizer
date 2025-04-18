@@ -11,12 +11,10 @@ module AiLocalizer
         def translate(text:, user_prompt:, system_prompt:)
           ai_response = request.execute(system_prompt, user_prompt)
 
-          response = AiLocalizer::Engines::Deepseek::Response.new(
+          AiLocalizer::Engines::Deepseek::Response.new(
             ai_response:,
             text:
           ).call
-
-          response
         rescue JSON::ParserError => e
           raise e
         end

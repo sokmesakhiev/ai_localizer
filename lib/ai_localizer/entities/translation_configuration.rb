@@ -3,7 +3,8 @@
 module AiLocalizer
   module Entities
     class TranslationConfiguration
-      def initialize(from: nil, to: nil, engine: nil, placeholder_formats: nil, placeholder_map: {}, placeholder_backward_map: {}, signature: nil)
+      def initialize(from: nil, to: nil, engine: nil, placeholder_formats: nil, placeholder_map: {},
+                     placeholder_backward_map: {}, signature: nil)
         @engine = engine
         @placeholder_formats = placeholder_formats
         @placeholder_backward_map = placeholder_backward_map
