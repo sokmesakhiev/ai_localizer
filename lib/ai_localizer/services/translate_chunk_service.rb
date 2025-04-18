@@ -2,7 +2,7 @@
 
 module AiLocalizer
   module Services
-    class TranslateChunkService
+    class TranslateChunkService < AiLocalizer::Services::Base
       attr_reader :file_path, :from_lang, :to_lang, :engine, :indicator, :text, :original_text, :failed_translations,
                   :formality, :max_translation_length_ratio, :translation_length_intensity
 
@@ -17,10 +17,6 @@ module AiLocalizer
         @formality = formality
         @max_translation_length_ratio = max_translation_length_ratio
         @translation_length_intensity = translation_length_intensity
-      end
-
-      def self.call(**args)
-        new(**args).call
       end
 
       def call

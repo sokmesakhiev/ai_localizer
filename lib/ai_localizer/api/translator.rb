@@ -5,12 +5,12 @@ module AiLocalizer
     class Translator
       CHUNK_SIZE = 100
 
-      attr_reader :from_lang, :to_lang, :engine
+      attr_reader :from_lang, :to_lang, :engine_type
 
-      def initialize(from_lang:, to_lang:, engine: nil)
+      def initialize(from_lang:, to_lang:, engine_type: nil)
         @from_lang = from_lang
         @to_lang = to_lang
-        @engine = engine || AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
+        @engine_type = engine_type || AiLocalizer.config.translator_engine
       end
 
       def translate(texts:, formality: nil, translation_length_intensity: nil, max_translation_length_ratio: nil)
@@ -58,6 +58,10 @@ module AiLocalizer
         end
 
         blocks
+      end
+
+      def engine
+        @engine ||= AiLocalizer::Utils::TranslationEngineSelector.call(engine_type:, from_lang:, to_lang:)
       end
     end
   end
