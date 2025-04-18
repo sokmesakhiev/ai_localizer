@@ -6,7 +6,7 @@ RSpec.describe AiLocalizer::Utils::PlaceholderProcessor do
   describe '#replace_placeholders_with_original' do
     it 'replaces placeholders with their original values' do
       placeholder_map = {
-        '%{name}' => '%p#01683305',
+        '%{name}' => '%p#01683305'
       }
       translations = ['Hello %p#01683305']
 
@@ -22,7 +22,9 @@ RSpec.describe AiLocalizer::Utils::PlaceholderProcessor do
       ]
       signature = '4b922c0b173c9de4a63ad9abb8f8d80f'
 
-      expect(described_class.replace_text_with_placeholders(content, matched_placeholders, signature)).to eq('Hello %p#01683305! Welcome to the AI translator.')
+      expect(described_class.replace_text_with_placeholders(content, matched_placeholders, signature)).to eq(
+        'Hello %p#01683305! Welcome to the AI translator.'
+      )
     end
   end
 
@@ -33,7 +35,10 @@ RSpec.describe AiLocalizer::Utils::PlaceholderProcessor do
         translation = 'Hello %{name}! Welcome to the AI translator.'
         all_placeholder_formats = AiLocalizer::Entities::Placeholders::DEFAULT_PLACEHOLDERS
 
-        extra_placeholders, missing_placeholders = described_class.analyze_placeholder_discrepancies(source:, translation:, all_placeholder_formats:)
+        extra_placeholders, missing_placeholders = described_class.analyze_placeholder_discrepancies(
+          source:, translation:,
+          all_placeholder_formats:
+        )
 
         expect(extra_placeholders).to eq([])
         expect(missing_placeholders).to eq([])
@@ -46,7 +51,11 @@ RSpec.describe AiLocalizer::Utils::PlaceholderProcessor do
         translation = 'Hello %{year}! Welcome to the AI translator.'
         all_placeholder_formats = AiLocalizer::Entities::Placeholders::DEFAULT_PLACEHOLDERS
 
-        extra_placeholders, missing_placeholders = described_class.analyze_placeholder_discrepancies(source:, translation:, all_placeholder_formats:)
+        extra_placeholders, missing_placeholders = described_class.analyze_placeholder_discrepancies(
+          source:,
+          translation:,
+          all_placeholder_formats:
+        )
 
         expect(extra_placeholders).to eq(['%{year}'])
         expect(missing_placeholders).to eq(['%{name}'])

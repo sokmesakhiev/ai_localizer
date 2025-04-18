@@ -2,7 +2,7 @@
 
 module AiLocalizer
   module Services
-    class CreateTranslationFileService
+    class CreateTranslationFileService < AiLocalizer::Services::Base
       attr_reader :from_lang, :to_lang, :blocks, :source_file_path, :target_file_path
 
       def initialize(source_file_path:, target_file_path:, blocks:, from_lang:, to_lang:)
@@ -29,6 +29,8 @@ module AiLocalizer
         print "\033[37m --> Creating #{target_file_path}  .. \n"
         File.write(target_file_path, content)
         print "\033[37m --> File #{target_file_path} is created .. \n"
+
+        content
       end
     end
   end

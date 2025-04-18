@@ -18,7 +18,7 @@ RSpec.describe AiLocalizer::Services::FileTranslatorService do
   end
 
   context 'without import existing translation' do
-    it "parses a valid YML file" do
+    it 'parses a valid YML file' do
       expected_yml = "es:
   title:
     welcome: Hola %{name}

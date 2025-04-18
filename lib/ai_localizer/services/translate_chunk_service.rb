@@ -2,11 +2,12 @@
 
 module AiLocalizer
   module Services
-    class TranslateChunkService
+    class TranslateChunkService < AiLocalizer::Services::Base
       attr_reader :file_path, :from_lang, :to_lang, :engine, :indicator, :text, :original_text, :failed_translations,
                   :formality, :max_translation_length_ratio, :translation_length_intensity
 
-      def initialize(blocks:, engine:, from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
+      def initialize(blocks:, engine:, from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil,
+                     translation_length_intensity: nil)
         @blocks = blocks
         @from_lang = from_lang
         @to_lang = to_lang
@@ -19,17 +20,15 @@ module AiLocalizer
         @translation_length_intensity = translation_length_intensity
       end
 
-      def self.call(**args)
-        new(**args).call
-      end
-
       def call
         # preprocess
         for_translation, processing_additional_data = preprocess_chunk(text)
 
         translated = perform_translation(for_translation)
         validate_translation_count(translated.count, for_translation.count)
-        translations = for_translation.each_with_index.to_h { |(signature, _segment), index| [signature, translated[index]] }
+        translations = for_translation.each_with_index.to_h do |(signature, _segment), index|
+          [signature, translated[index]]
+        end
 
         # postprocess
         translations = postprocess_chunk(translations, processing_additional_data)
@@ -61,8 +60,9 @@ module AiLocalizer
       end
 
       def postprocess_chunk(translations, additional_data)
-        processed_translations = translations.to_h do |signature, translation|
-          processed_translation = postprocessor.process_all(source: original_text[signature], translation:, signature:, additional_data:)
+        translations.to_h do |signature, translation|
+          processed_translation = postprocessor.process_all(source: original_text[signature], translation:, signature:,
+                                                            additional_data:)
           @failed_translations << signature if additional_data.failed?(id: signature)
           [signature, processed_translation]
         end
@@ -75,7 +75,8 @@ module AiLocalizer
         strings = texts.select { |t| t.is_a?(String) }
         chunks = chunk_array(strings)
         chunks.each do |chunk|
-          translations = engine.translate(text: chunk, formality:, max_translation_length_ratio:, translation_length_intensity:)
+          translations = engine.translate(text: chunk, formality:, max_translation_length_ratio:,
+                                          translation_length_intensity:)
 
           translations = [''] * chunk.size if translations.nil?
           translations = [translations] if translations.is_a?(String)

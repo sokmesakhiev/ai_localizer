@@ -13,7 +13,7 @@ module AiLocalizer
         def client_params
           {
             gemini_api_key: AiLocalizer.config.gemini_api_key,
-            gemini_model: AiLocalizer.config.gemini_model,
+            gemini_model: AiLocalizer.config.gemini_model
           }
         end
       end

@@ -2,7 +2,7 @@
 
 module AiLocalizer
   module Services
-    class FileTranslatorService
+    class FileTranslatorService < AiLocalizer::Services::Base
       CHUNK_SIZE = 100
 
       attr_reader :template_file_path, :engine, :translation_settings

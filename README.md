@@ -189,11 +189,13 @@ You can also use the gem’s API to translate custom strings:
 
 ```ruby
 AiLocalizer::Api::Translator.new(
-  texts: ['hello'],
   from_lang: 'en',
-  to_lang: 'fr',
+  to_lang: 'fr'
+).translate(
+  texts: ['hello'],
   formality: 'formal',                   # optional
-  max_translation_length_ratio: 1.2      # optional
+  max_translation_length_ratio: 1.2,     # optional
+  translation_length_intensity: 'strict' # optional
 )
 ```
 

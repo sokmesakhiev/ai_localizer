@@ -9,17 +9,18 @@ module AiLocalizer
                   :bedrock_aws_http_read_timeout, :bedrock_aws_retry_limit, :bedrock_aws_session_token,
                   :anthropic_api_key, :anthropic_api_version, :anthropic_model, :deepseek_access_token,
                   :deepseek_model, :source_file_paths, :open_ai_access_token, :open_ai_model,
-                  :open_ai_organization_id, :open_ai_uri_base, :gemini_api_key, :gemini_model,
+                  :open_ai_organization_id, :open_ai_uri_base, :gemini_api_key, :gemini_model, :use_existing_translations,
                   :source_lang, :target_langs, :formality, :translation_length_intensity, :max_translation_length_ratio
 
     def initialize
       @source_lang = 'en'
-      @target_langs = []
+      @target_langs = %w[es fr]
       @formality = nil
       @translation_length_intensity = nil
       @max_translation_length_ratio = nil
+      @use_existing_translations = true
 
-      @translator_engine = 'anthropic'
+      @translator_engine = 'gemini'
       @source_file_paths = []
 
       @bedrock_api_version = 'bedrock-2023-05-31'
@@ -41,7 +42,8 @@ module AiLocalizer
       @open_ai_organization_id = ''
       @open_ai_uri_base = 'https://api.openai.com/v1'
 
-      @gemini_api_key = ENV['GEMINI_API_KEY']
+      # @gemini_api_key = ENV['GEMINI_API_KEY']
+      @gemini_api_key = 'AIzaSyCWHswF1BBnxKnV9W7vhzhyd8_tv3h4kC8'
       @gemini_model = 'gemini-2.0-flash'
 
       @deepseek_access_token = ENV['DEEPSEEK_ACCESS_TOKEN']

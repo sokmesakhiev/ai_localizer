@@ -12,7 +12,7 @@ module AiLocalizer
         end
 
         def execute(system_prompt, user_prompt)
-          response = deepseek_client.chat(
+          deepseek_client.chat(
             model:,
             messages: [
               { role: 'system', content: system_prompt },

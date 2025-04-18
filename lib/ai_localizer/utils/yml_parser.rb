@@ -28,7 +28,9 @@ module AiLocalizer
       def call
         flattened_entries.flat_map do |entry|
           entry.keys.map do |key|
-            generate_payload_from_entry(AiLocalizer::Entities::SourceBlock.decorate(key, index: key, original: entry[key], path: file))
+            generate_payload_from_entry(
+              AiLocalizer::Entities::SourceBlock.decorate(key, index: key, original: entry[key], path: file)
+            )
           end
         end
       end

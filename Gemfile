@@ -1,19 +1,21 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+source 'https://rubygems.org'
 
-gem 'ruby-anthropic'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
 gem 'aws-sdk-bedrockruntime', '~> 1.44.0'
-gem "rspec-core"
-gem "rspec-expectations"
-gem "rspec-mocks"
-gem "rspec-rails"
-gem "rspec-support"
-gem "figaro"
-gem 'ruby-openai'
 gem 'deepseek-client'
-gem 'oj'
 gem 'faraday'
+gem 'figaro'
+gem 'oj'
+gem 'rspec-core'
+gem 'rspec-expectations'
+gem 'rspec-mocks'
+gem 'rspec-rails'
+gem 'rspec-support'
+gem 'ruby-anthropic'
+gem 'ruby-openai'
 
 # Specify your gem's dependencies in ai_localizer.gemspec
 gemspec

@@ -27,7 +27,9 @@ module AiLocalizer
       end
 
       def try(method_name)
-        send(method_name) rescue nil
+        send(method_name)
+      rescue StandardError
+        nil
       end
 
       def self.decorate(relation, **context)

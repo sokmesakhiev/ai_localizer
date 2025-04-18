@@ -22,6 +22,10 @@ AiLocalizer.configure do |config|
   # Options: 'bedrock', 'anthropic', 'deepseek', 'open_ai'
   config.translator_engine = Figaro.env.TRANSLATOR_ENGINE || 'anthropic'
 
+  # Use existing translations
+  # Options: true, false
+  config.use_existing_translations = Figaro.env.USE_EXISTING_TRANSLATIONS
+
   # Source file paths to translate
   config.source_file_paths = Figaro.env.SOURCE_FILE_PATHS
 
@@ -31,10 +35,10 @@ AiLocalizer.configure do |config|
   config.bedrock_aws_region = Figaro.env.BEDROCK_AWS_REGION || 'us-east-1'
   config.bedrock_aws_access_key_id = Figaro.env.BEDROCK_AWS_ACCESS_KEY_ID
   config.bedrock_aws_secret_access_key = Figaro.env.BEDROCK_AWS_SECRET_ACCESS_KEY
-  config.bedrock_aws_http_open_timeout = Figaro.env.AWS_BEDROCK_HTTP_OPEN_TIMEOUT || 60
-  config.bedrock_aws_http_read_timeout = Figaro.env.AWS_BEDROCK_HTTP_READ_TIMEOUT || 120
-  config.bedrock_aws_retry_limit = Figaro.env.AWS_BEDROCK_RETRY_LIMIT || 5
-  config.bedrock_aws_session_token = Figaro.env.AWS_BEDROCK_SESSION_TOKEN
+  config.bedrock_aws_http_open_timeout = Figaro.env.BEDROCK_AWS_HTTP_OPEN_TIMEOUT || 60
+  config.bedrock_aws_http_read_timeout = Figaro.env.BEDROCK_AWS_HTTP_READ_TIMEOUT || 120
+  config.bedrock_aws_retry_limit = Figaro.env.BEDROCK_AWS_RETRY_LIMIT || 5
+  config.bedrock_aws_session_token = Figaro.env.BEDROCK_AWS_SESSION_TOKEN
 
   # Anthropic configuration
   config.anthropic_api_key = Figaro.env.ANTHROPIC_API_KEY
@@ -43,7 +47,7 @@ AiLocalizer.configure do |config|
 
   # Deepseek configuration
   config.deepseek_access_token = Figaro.env.DEEPSEEK_ACCESS_TOKEN
-  config.deepseek_model = Figaro.env.DEEPSEEK_MODEL || 'claude-3-5-sonnet-20240620'
+  config.deepseek_model = Figaro.env.DEEPSEEK_MODEL || 'deepseek-chat'
 
   # OpenAI configuration
   config.open_ai_access_token = Figaro.env.OPENAI_ACCESS_TOKEN

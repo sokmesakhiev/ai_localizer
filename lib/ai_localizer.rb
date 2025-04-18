@@ -1,4 +1,4 @@
-require "ai_localizer/version"
+require 'ai_localizer/version'
 require 'ostruct'
 require 'pry'
 require 'yaml'
@@ -17,6 +17,7 @@ require_relative './ai_localizer/processors/post'
 
 require_relative './ai_localizer/api/translator'
 
+require_relative './ai_localizer/services/base'
 require_relative './ai_localizer/services/create_translation_file_service'
 require_relative './ai_localizer/services/file_translator_service'
 require_relative './ai_localizer/services/translate_chunk_service'
@@ -67,7 +68,8 @@ module AiLocalizer
 
   def self.create_locales(template_file_path:)
     from_lang = AiLocalizer.config.source_lang
-    to_langs = JSON.parse(AiLocalizer.config.target_langs)
+    to_langs = AiLocalizer.config.target_langs
+    engine_type = AiLocalizer.config.translator_engine
 
     to_langs.each do |to_lang|
       file_name_pattern = AiLocalizer::Utils::FileNamePattern.new(template_file_path:, from_lang:, to_lang:)
@@ -75,15 +77,15 @@ module AiLocalizer
 
       print "\e[31m --> Translating file #{file_path} from #{from_lang} to #{to_lang} .. \e[0m \n"
 
-      engine = AiLocalizer::Utils::TranslationEngineSelector.new(from_lang:, to_lang:).call
+      engine = AiLocalizer::Utils::TranslationEngineSelector.call(engine_type:, from_lang:, to_lang:)
 
       next if engine.blank? || template_file_path.blank?
 
-      translations = AiLocalizer::Services::FileTranslatorService.new(
+      AiLocalizer::Services::FileTranslatorService.call(
         template_file_path:,
         engine:,
         translation_settings: translation_settings.merge(from_lang:, to_lang:)
-      ).call
+      )
 
       print "\e[32m --> Translation done #{file_path} from #{from_lang} to #{to_lang} .. \e[0m \n\n"
     end
@@ -93,7 +95,8 @@ module AiLocalizer
     {
       formality: AiLocalizer.config.formality,
       translation_length_intensity: AiLocalizer.config.translation_length_intensity,
-      max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio
+      max_translation_length_ratio: AiLocalizer.config.max_translation_length_ratio,
+      use_existing_translations: AiLocalizer.config.use_existing_translations
     }
   end
 end

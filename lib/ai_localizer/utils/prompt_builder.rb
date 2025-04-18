@@ -5,7 +5,8 @@ module AiLocalizer
     class PromptBuilder
       attr_reader :from_lang, :to_lang, :formality, :max_translation_length_ratio, :translation_length_intensity
 
-      def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil, translation_length_intensity: nil)
+      def initialize(from_lang:, to_lang:, formality: nil, max_translation_length_ratio: nil,
+                     translation_length_intensity: nil)
         @formality = formality
         @max_translation_length_ratio = max_translation_length_ratio
         @translation_length_intensity = translation_length_intensity
@@ -14,7 +15,12 @@ module AiLocalizer
       end
 
       def build_prompt(content: nil)
-        params = { source_language_name:, target_language_name:, formality_prompt:, restrict_translation_length_result_prompt: }
+        params = {
+          source_language_name:,
+          target_language_name:,
+          formality_prompt:,
+          restrict_translation_length_result_prompt:
+        }
 
         user_prompt_parameters = content.nil? ? params : params.merge(content:)
 
