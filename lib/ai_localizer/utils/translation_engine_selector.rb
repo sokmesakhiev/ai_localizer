@@ -16,7 +16,6 @@ module AiLocalizer
       end
 
       def call
-        binding.pry
         engine = case engine_type
                  when 'bedrock'
                    AiLocalizer::Engines::Bedrock::Engine

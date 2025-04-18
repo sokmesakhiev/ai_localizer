@@ -5,7 +5,7 @@ AiLocalizer.configure do |config|
   config.source_lang = Figaro.env.SOURCE_LANG || 'en'
 
   # Target languages iso
-  config.target_langs = Figaro.env.TARGET_LANGS || '[]'
+  config.target_langs = JSON.parse(Figaro.env.TARGET_LANGS) || []
 
   # Formality
   # Options: 'formal', 'informal'
@@ -27,7 +27,7 @@ AiLocalizer.configure do |config|
   config.use_existing_translations = Figaro.env.USE_EXISTING_TRANSLATIONS
 
   # Source file paths to translate
-  config.source_file_paths = Figaro.env.SOURCE_FILE_PATHS
+  config.source_file_paths = JSON.parse(Figaro.env.SOURCE_FILE_PATHS) || []
 
   # Bedrock configuration
   config.bedrock_api_version = Figaro.env.BEDROCK_API_VERSION || 'bedrock-2023-05-31'

@@ -43,6 +43,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday'
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'ruby-openai'
+  spec.add_dependency 'figaro'
 
   spec.add_development_dependency 'activesupport'
   spec.add_development_dependency 'bundler', '~> 2.3.17'
