@@ -3,7 +3,7 @@ namespace :ai_localizer do
   # print "\033[37m --> Processing #{path} : #{lang} .. \033[32m done  \n"
 
   task translate: :environment do
-    locale_paths = JSON.parse(AiLocalizer.config.source_file_paths)
+    locale_paths = AiLocalizer.config.source_file_paths
 
     locale_paths.each do |template_file_path|
       AiLocalizer.create_locales(template_file_path:)
