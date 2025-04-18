@@ -16,6 +16,15 @@ gem 'rspec-rails'
 gem 'rspec-support'
 gem 'ruby-anthropic'
 gem 'ruby-openai'
+gem 'rake', '~> 10.0'
+
+group :development, :test do
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'faker'
+  gem 'fakeweb'
+  gem 'rubocop'
+end
 
 # Specify your gem's dependencies in ai_localizer.gemspec
 gemspec

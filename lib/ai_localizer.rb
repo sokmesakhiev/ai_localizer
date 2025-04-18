@@ -1,6 +1,5 @@
 require 'ai_localizer/version'
 require 'ostruct'
-require 'pry'
 require 'yaml'
 require 'json'
 require 'openai'
