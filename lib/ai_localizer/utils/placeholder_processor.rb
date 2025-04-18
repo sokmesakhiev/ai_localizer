@@ -16,7 +16,7 @@ module AiLocalizer
         end
       end
 
-      def self.replace_text_with_placeholders(content, matched_placeholders, signature)
+      def self.replace_text_with_placeholders(content, matched_placeholders, _signature)
         return content unless content.is_a?(String) && matched_placeholders.any?
 
         content = content.dup
@@ -74,15 +74,13 @@ module AiLocalizer
             end_index = match.end(0) - 1
             matched_text = match[0]
 
-            new_placeholder = { start: start_index, end: end_index, placeholder: matched_text, pattern:}
+            new_placeholder = { start: start_index, end: end_index, placeholder: matched_text, pattern: }
 
             type = case pattern
                    when AiLocalizer::Entities::Placeholders::OPEN_TAG
                      'open_html_tag'
                    when AiLocalizer::Entities::Placeholders::CLOSE_TAG
                      'close_html_tag'
-                   else
-                     nil
                    end
 
             new_placeholder[:token] = AiLocalizer::Utils::Tokenizer.generate_token(token_root: matched_text, type:)

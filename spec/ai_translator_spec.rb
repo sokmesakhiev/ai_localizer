@@ -1,6 +1,6 @@
 RSpec.describe AiLocalizer do
-  let (:from_lang) { 'en' }
-  let (:target_langs) { ['es', 'fr'] }
+  let(:from_lang) { 'en' }
+  let(:target_langs) { %w[es fr] }
   let(:template_file_path) { 'spec/fixtures/{{lang}}.yml' }
   let(:configuration) do
     instance_double(
@@ -16,13 +16,13 @@ RSpec.describe AiLocalizer do
     )
   end
 
-  describe "version" do
-    it "has a version number" do
+  describe 'version' do
+    it 'has a version number' do
       expect(AiLocalizer::VERSION).not_to be nil
     end
   end
 
-  describe "create_locales" do
+  describe 'create_locales' do
     let(:fr_engine) { AiLocalizer::Engines::Gemini::Engine.new(from_lang: 'en', to_lang: 'fr') }
     let(:es_engine) { AiLocalizer::Engines::Gemini::Engine.new(from_lang: 'en', to_lang: 'es') }
 
@@ -41,8 +41,8 @@ RSpec.describe AiLocalizer do
       ).and_return(es_engine)
     end
 
-    it "creates i18n files" do
-      translator = AiLocalizer.create_locales(template_file_path:)
+    it 'creates i18n files' do
+      AiLocalizer.create_locales(template_file_path:)
 
       expect(AiLocalizer::Services::FileTranslatorService).to have_received(:call).with(
         template_file_path:,

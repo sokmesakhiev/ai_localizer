@@ -14,7 +14,7 @@ module AiLocalizer
 
     def initialize
       @source_lang = 'en'
-      @target_langs = ['es', 'fr']
+      @target_langs = %w[es fr]
       @formality = nil
       @translation_length_intensity = nil
       @max_translation_length_ratio = nil

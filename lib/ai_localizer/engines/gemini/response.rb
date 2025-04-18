@@ -11,7 +11,9 @@ module AiLocalizer
         end
 
         def body_parts
-          @body_parts ||= JSON.parse(ai_response.body)["candidates"][0]["content"]["parts"].map { |part| part["text"].strip.sub('```json', '').sub(/```$/, '') }
+          @body_parts ||= JSON.parse(ai_response.body)['candidates'][0]['content']['parts'].map do |part|
+            part['text'].strip.sub('```json', '').sub(/```$/, '')
+          end
         end
       end
     end

@@ -16,7 +16,8 @@ module AiLocalizer
             text:
           ).call
 
-          yield request, response, ai_response if block_given? # Pass the response and ai_response to the block if a block is given
+          # Pass the response and ai_response to the block if a block is given
+          yield request, response, ai_response if block_given?
 
           response
         end

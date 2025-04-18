@@ -47,9 +47,9 @@ module AiLocalizer
               context: nil,
               entry: nil,
               existing_translation: nil,
-              index: ["en", index.to_s],
+              index: ['en', index.to_s],
               parent_index: nil,
-              path: "",
+              path: '',
               plural: nil,
               plural_count: nil,
               signature: Digest::MD5.hexdigest("#{index}#{text}")

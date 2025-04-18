@@ -21,8 +21,6 @@ RSpec.describe AiLocalizer::Utils::YmlFormatter do
   let(:translated_yml) { File.read('spec/fixtures/es.yml') }
 
   it 'formats a YML file' do
-    dir_path = 'spec/fixtures/'
-
     translated = described_class.new(source_file_path:, translations:, from_lang: 'en', to_lang: 'es').call
 
     expect(translated).to eq(translated_yml)

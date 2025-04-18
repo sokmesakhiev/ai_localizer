@@ -1,4 +1,4 @@
-require "ai_localizer/version"
+require 'ai_localizer/version'
 require 'ostruct'
 require 'pry'
 require 'yaml'
