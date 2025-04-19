@@ -6,7 +6,7 @@ AI_LOCALIZER_CONFIG = raw_config[Rails.env] || {}
 
 AiLocalizer.configure do |config|
   # Source language iso
-  config.source_lang = SOURCE_LANG || 'en'
+  config.source_lang = AI_LOCALIZER_CONFIG['SOURCE_LANG'] || 'en'
 
   # Target languages iso
   config.target_langs = AI_LOCALIZER_CONFIG['TARGET_LANGS'] || []
@@ -31,7 +31,7 @@ AiLocalizer.configure do |config|
   config.use_existing_translations = AI_LOCALIZER_CONFIG['USE_EXISTING_TRANSLATIONS']
 
   # Source file paths to translate
-  config.source_file_paths = JSON.parse(AI_LOCALIZER_CONFIG['SOURCE_FILE_PATHS']) || []
+  config.source_file_paths = AI_LOCALIZER_CONFIG['SOURCE_FILE_PATHS'] || []
 
   # Bedrock configuration
   config.bedrock_api_version = AI_LOCALIZER_CONFIG['BEDROCK_API_VERSION'] || 'bedrock-2023-05-31'
