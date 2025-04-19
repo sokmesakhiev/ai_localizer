@@ -37,19 +37,19 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'anthropic'
-  spec.add_dependency 'aws-sdk-bedrockruntime'
-  spec.add_dependency 'deepseek-client'
+  spec.add_dependency 'ruby-anthropic', '~> 0.4.2'
+  spec.add_dependency 'aws-sdk-bedrockruntime', '~> 1.44.0'
+  spec.add_dependency 'deepseek-client', '~> 0.1.0'
   spec.add_dependency 'faraday'
   spec.add_dependency 'nokogiri'
-  spec.add_dependency 'ruby-openai'
-  spec.add_dependency 'figaro'
+  spec.add_dependency 'ruby-openai', '~> 8.0.0'
+  spec.add_dependency 'oj', '~> 3.16.10'
 
   spec.add_development_dependency 'activesupport'
   spec.add_development_dependency 'bundler', '~> 2.3.17'
   spec.add_development_dependency 'faker'
   spec.add_development_dependency 'fakeweb'
-  spec.add_development_dependency 'pry', '~> 0.13'
+  spec.add_development_dependency 'pry', '~> 0.15.2'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec-its'

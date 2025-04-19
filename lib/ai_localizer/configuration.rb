@@ -42,8 +42,7 @@ module AiLocalizer
       @open_ai_organization_id = ''
       @open_ai_uri_base = 'https://api.openai.com/v1'
 
-      # @gemini_api_key = ENV['GEMINI_API_KEY']
-      @gemini_api_key = 'AIzaSyCWHswF1BBnxKnV9W7vhzhyd8_tv3h4kC8'
+      @gemini_api_key = ENV['GEMINI_API_KEY']
       @gemini_model = 'gemini-2.0-flash'
 
       @deepseek_access_token = ENV['DEEPSEEK_ACCESS_TOKEN']
