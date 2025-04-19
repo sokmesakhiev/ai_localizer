@@ -1,11 +1,10 @@
 PATH
   remote: .
   specs:
-    ai_localizer (0.1.5)
+    ai_localizer (0.1.6)
       aws-sdk-bedrockruntime (~> 1.44.0)
       deepseek-client (~> 0.1.0)
       faraday
-      figaro (~> 1.2.0)
       nokogiri
       oj (~> 3.16.10)
       ruby-anthropic (~> 0.4.2)
@@ -74,8 +73,6 @@ GEM
       net-http (>= 0.5.0)
     faraday-retry (2.3.0)
       faraday (~> 2.0)
-    figaro (1.2.0)
-      thor (>= 0.14.0, < 2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     jmespath (1.6.2)
@@ -200,7 +197,6 @@ DEPENDENCIES
   faker
   fakeweb
   faraday
-  figaro
   oj
   pry
   pry-byebug
