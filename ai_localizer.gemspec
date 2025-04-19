@@ -43,7 +43,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday'
   spec.add_dependency 'nokogiri'
   spec.add_dependency 'ruby-openai', '~> 8.0.0'
-  spec.add_dependency 'figaro', '~> 1.2.0'
   spec.add_dependency 'oj', '~> 3.16.10'
 
   spec.add_development_dependency 'activesupport'

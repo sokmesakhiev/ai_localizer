@@ -1,0 +1,64 @@
+default: &default
+  # Source language is# config/ai_localizer.yml
+  SOURCE_LANG: 'en'
+
+  # Target languages iso
+  TARGET_LANGS:
+    - 'es'
+    - 'fr'
+
+  # Options: 'formal', 'informal', nil
+  FORMALITY: nil
+
+  # Options: 'soft', 'strict', nil
+  TRANSLATION_LENGTH_INTENSITY: nil
+  MAX_TRANSLATION_LENGTH_RATIO: nil
+
+  # Options: true, false
+  USE_EXISTING_TRANSLATIONS: true
+
+  # Source file paths to translate
+  SOURCE_FILE_PATHS:
+    - 'config/locales/{{lang}}.yml'
+
+  # Options: 'bedrock', 'anthropic', 'deepseek', 'open_ai', 'gemini'
+  TRANSLATOR_ENGINE: 'anthropic'
+
+  # Anthropic configuration
+  ANTHROPIC_API_KEY: 'anthropic_api_key' # replace with your Anthropic API key
+  ANTHROPIC_API_VERSION: '2023-06-01'
+  ANTHROPIC_MODEL: 'claude-3-7-sonnet-20250219'
+
+  # Bedrock configuration
+  BEDROCK_API_VERSION: 'bedrock-2023-05-31'
+  BEDROCK_MODEL: 'anthropic.claude-3-5-sonnet-20240620-v1:0'
+  BEDROCK_AWS_REGION: 'us-west-1'
+  BEDROCK_AWS_ACCESS_KEY_ID: 'bedrock_key_id' # replace with your Bedrock key ID
+  BEDROCK_AWS_SECRET_ACCESS_KEY: 'bedrock_secret_access_key' # replace with your Bedrock secret access key
+  BEDROCK_AWS_HTTP_OPEN_TIMEOUT: 60
+  BEDROCK_AWS_HTTP_READ_TIMEOUT: 120
+  BEDROCK_AWS_RETRY_LIMIT: 5
+  BEDROCK_AWS_SESSION_TOKEN: nil
+
+  # Deepseek configuration
+  DEEPSEEK_ACCESS_TOKEN: 'deepseek_access_token' # replace with your Deepseek access token
+  DEEPSEEK_MODEL: 'deepseek-chat'
+
+  # OpenAI configuration
+  OPENAI_ACCESS_TOKEN: 'openai_access_token' # replace with your OpenAI access token
+  OPENAI_ORGANIZATION_ID: nil
+  OPENAI_API_BASE: 'https://api.openai.com/v1'
+  OPENAI_MODEL: 'gpt-4o'
+
+  # Gemini configuration
+  GEMINI_API_KEY: 'gemini_api_key' # replace with your Gemini API key
+  GEMINI_MODEL: 'gemini-2.0-flash'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

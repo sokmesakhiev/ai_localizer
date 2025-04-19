@@ -15,7 +15,7 @@ module AiLocalizer
 
       def call
         translations = blocks.map do |block|
-          block.slice(:index, :translation).stringify_keys
+          block.slice(:index, :translation).transform_keys(&:to_s)
         end
 
         print "\033[37m --> Formatting #{target_file_path}  .. \n"

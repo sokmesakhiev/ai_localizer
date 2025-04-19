@@ -69,7 +69,7 @@ module AiLocalizer
           regex = Regexp.new(pattern)
 
           content.enum_for(:scan, regex).each do
-            match = $LAST_MATCH_INFO
+            match = Regexp.last_match
             start_index = match.begin(0)
             end_index = match.end(0) - 1
             matched_text = match[0]
